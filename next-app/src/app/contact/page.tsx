@@ -38,7 +38,7 @@ export default function Contact() {
       <Link href="/" className="absolute top-6 right-8 text-3xl text-gray-400 hover:text-fuchsia-400 transition-colors" aria-label="Close Contact">&times;</Link>
       <div className="w-full max-w-xl flex flex-col items-start relative">
         <div className={status === 'success' ? 'blur-sm brightness-75 pointer-events-none select-none' : ''}>
-          <h2 className="text-3xl font-light mb-2 text-white">Apply to Join the Waitlist</h2>
+          <h2 className="text-3xl font-light mb-2 text-white font-montserrat">Apply to Join the Waitlist</h2>
           {status !== 'success' && (
             <form className="space-y-5 w-full" onSubmit={handleSubmit}>
               <div className="flex flex-col sm:flex-row sm:space-x-4 w-full">
