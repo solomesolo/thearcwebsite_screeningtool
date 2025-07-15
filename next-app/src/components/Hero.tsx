@@ -7,17 +7,17 @@ export default function Hero() {
     <div className="relative w-full min-h-screen bg-black text-white font-montserrat flex flex-col">
       <DNAParticles />
       {/* Header: Logo/Menu */}
-      <div className="fixed top-[5vh] left-0 z-30 w-full pointer-events-none">
-        <div className="flex justify-between items-start w-full px-12 pointer-events-auto">
-          <div className="text-4xl font-bold tracking-tight text-white select-none">TheArc</div>
-          <nav className="flex flex-col space-y-2 text-lg font-normal items-end">
+      <div className="sticky md:fixed top-0 left-0 z-30 w-full pointer-events-none bg-black/80 md:bg-transparent" style={{WebkitBackdropFilter: 'blur(2px)'}}>
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-start w-full px-4 md:px-12 pt-4 md:pt-[5vh] pointer-events-auto">
+          <div className="text-3xl md:text-4xl font-bold tracking-tight text-white select-none">TheArc</div>
+          <nav className="flex flex-row md:flex-col space-x-4 md:space-x-0 md:space-y-2 text-base md:text-lg font-normal items-end md:items-end mt-2 md:mt-0">
             <Link href="/about" className="hover:text-fuchsia-400 transition-colors">About</Link>
             <Link href="/contact" className="hover:text-fuchsia-400 transition-colors">Contact</Link>
           </nav>
         </div>
       </div>
       {/* Hero Content */}
-      <div className="flex-1 flex flex-col items-center justify-center text-center z-10 pt-24 md:pt-32 pb-20">
+      <div className="flex-1 flex flex-col items-center justify-center text-center z-10 mt-20 md:mt-0 pt-8 md:pt-32 pb-20">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 leading-tight max-w-2xl mx-auto" style={{textShadow: '0 2px 24px #000'}}>
           Longevity isn’t a product.<br />
           It’s a process.<br />
