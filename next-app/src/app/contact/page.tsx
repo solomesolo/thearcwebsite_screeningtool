@@ -41,9 +41,9 @@ export default function Contact() {
           <h2 className="text-3xl font-light mb-2 text-white">Apply to Join the Waitlist</h2>
           {status !== 'success' && (
             <form className="space-y-5 w-full" onSubmit={handleSubmit}>
-              <div className="flex space-x-4 flex-col sm:flex-row">
-                <input type="text" placeholder="First name" value={firstName} onChange={e => setFirstName(e.target.value)} required className="flex-1 rounded-md px-4 py-3 bg-black border border-gray-400 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-fuchsia-600" />
-                <input type="text" placeholder="Last name" value={lastName} onChange={e => setLastName(e.target.value)} required className="flex-1 rounded-md px-4 py-3 bg-black border border-gray-400 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-fuchsia-600 mt-4 sm:mt-0" />
+              <div className="flex flex-col sm:flex-row sm:space-x-4 w-full">
+                <input type="text" placeholder="First name" value={firstName} onChange={e => setFirstName(e.target.value)} required className="w-full rounded-md px-4 py-3 bg-black border border-gray-400 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-fuchsia-600 mb-4 sm:mb-0" />
+                <input type="text" placeholder="Last name" value={lastName} onChange={e => setLastName(e.target.value)} required className="w-full rounded-md px-4 py-3 bg-black border border-gray-400 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-fuchsia-600" />
               </div>
               <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required className="w-full rounded-md px-4 py-3 bg-black border border-gray-400 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-fuchsia-600" />
               <textarea placeholder="Why do you want to join TheArc?" value={reason} onChange={e => setReason(e.target.value)} rows={3} required className="w-full rounded-md px-4 py-3 bg-black border border-gray-400 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-fuchsia-600 resize-none" />

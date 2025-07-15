@@ -4,7 +4,7 @@ import DNAParticles from "./DNAParticles";
 
 export default function Hero() {
   return (
-    <div className="relative w-full bg-black text-white font-montserrat flex flex-col">
+    <div className="relative w-full min-h-screen bg-black text-white font-montserrat flex flex-col">
       <DNAParticles />
       {/* Header: Logo/Menu */}
       <div className="fixed top-[5vh] left-0 z-30 w-full pointer-events-none">
