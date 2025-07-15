@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from "../components/Footer";
 import HeroWithOverlay from "../components/HeroWithOverlay";
+import DNAParticles from "../components/DNAParticles";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,12 +21,11 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
-  const pathname = typeof window !== "undefined" ? window.location.pathname : "";
-  const isOverlay = pathname === "/about" || pathname === "/contact";
   return (
     <html lang="en">
       <body className={"font-montserrat antialiased bg-black min-h-screen flex flex-col"}>
-        <main className="flex-1 flex flex-col justify-center bg-black">
+        <DNAParticles />
+        <main className="flex-1 flex flex-col bg-black relative z-10">
           <HeroWithOverlay />
           {children}
         </main>

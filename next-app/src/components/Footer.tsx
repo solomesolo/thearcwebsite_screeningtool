@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="w-full px-8 py-6 bg-black border-t border-gray-800 flex flex-col md:flex-row items-center justify-between text-gray-400 text-sm z-50">
+    <footer className="fixed bottom-0 left-0 w-full px-8 py-6 bg-black border-t border-gray-800 flex flex-col md:flex-row items-center justify-between text-gray-400 text-sm z-50">
       <div className="flex items-center space-x-6 mb-2 md:mb-0">
         <Link href="/privacy-policy" className="hover:text-fuchsia-400 transition-colors">Privacy Policy</Link>
         <Link href="/terms" className="hover:text-fuchsia-400 transition-colors">Terms and Conditions</Link>

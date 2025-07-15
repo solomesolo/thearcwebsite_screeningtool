@@ -34,7 +34,7 @@ export default function Contact() {
   };
 
   return (
-    <aside className="fixed top-0 right-0 h-screen w-full sm:w-[600px] bg-black text-white z-50 shadow-2xl flex flex-col items-center justify-center px-4 py-8 sm:px-8 sm:py-16 animate-slide-in max-h-screen overflow-y-auto">
+    <aside className="fixed top-0 right-0 h-screen w-full sm:w-[600px] bg-black text-white z-50 shadow-2xl flex flex-col items-center justify-center px-4 py-8 sm:px-8 sm:py-16 animate-slide-in max-h-screen overflow-y-auto font-montserrat">
       <Link href="/" className="absolute top-6 right-8 text-3xl text-gray-400 hover:text-fuchsia-400 transition-colors" aria-label="Close Contact">&times;</Link>
       <div className="w-full max-w-xl flex flex-col items-start relative">
         <div className={status === 'success' ? 'blur-sm brightness-75 pointer-events-none select-none' : ''}>
