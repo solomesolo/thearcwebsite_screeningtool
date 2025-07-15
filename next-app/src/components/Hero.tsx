@@ -17,7 +17,7 @@ export default function Hero() {
         </div>
       </div>
       {/* Hero Content */}
-      <div className="flex-1 flex flex-col items-center justify-center text-center z-10 pt-32 pb-20">
+      <div className="flex-1 flex flex-col items-center justify-center text-center z-10 pt-24 md:pt-32 pb-20">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 leading-tight max-w-2xl mx-auto" style={{textShadow: '0 2px 24px #000'}}>
           Longevity isn’t a product.<br />
           It’s a process.<br />

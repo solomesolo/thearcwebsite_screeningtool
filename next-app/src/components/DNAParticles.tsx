@@ -28,8 +28,8 @@ export default function DNAParticles() {
     const height = dimensions.height;
     const amplitude = height * AMPLITUDE_RATIO;
     const yOffset = height / 2;
-    const xStart = 80;
-    const xEnd = width - 80;
+    const xStart = 0;
+    const xEnd = width;
     function animate(time: number) {
       for (let i = 0; i < NUM_PARTICLES; i++) {
         const t = (i / NUM_PARTICLES) * Math.PI * 4 + time * SPEED;
