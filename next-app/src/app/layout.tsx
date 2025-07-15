@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from "../components/Footer";
 import HeroWithOverlay from "../components/HeroWithOverlay";
-import DNAParticles from "../components/DNAParticles";
+// Static DNA SVG background
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,7 +24,17 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body className={"font-montserrat antialiased bg-black min-h-screen flex flex-col"}>
-        <DNAParticles />
+        <div style={{position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 0, pointerEvents: 'none', background: 'transparent'}} aria-hidden="true">
+          <svg width="100%" height="100%" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg" style={{width: '100vw', height: '100vh', display: 'block'}}>
+            <polyline points="0,540 320,340 640,740 960,340 1280,740 1600,340 1920,540" stroke="#d946ef" strokeWidth="6" fill="none" opacity="0.18" />
+            <polyline points="0,540 320,740 640,340 960,740 1280,340 1600,740 1920,540" stroke="#d946ef" strokeWidth="6" fill="none" opacity="0.18" />
+            <g>
+              {Array.from({length: 48}).map((_,i) => (
+                <circle key={i} cx={40+i*40} cy={540+Math.sin(i/3)*200} r="7" fill="#d946ef" opacity="0.5" />
+              ))}
+            </g>
+          </svg>
+        </div>
         <main className="flex-1 flex flex-col bg-black relative z-10">
           <HeroWithOverlay />
           {children}

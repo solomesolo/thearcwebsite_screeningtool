@@ -6,7 +6,7 @@ export default function About() {
   return (
     <aside className="fixed top-0 right-0 h-screen w-full sm:w-[600px] bg-black text-white z-50 shadow-2xl flex flex-col items-center px-4 py-8 sm:px-8 sm:py-16 animate-slide-in overflow-y-auto font-montserrat">
       <Link href="/" className="absolute top-6 right-8 text-3xl text-gray-400 hover:text-fuchsia-400 transition-colors" aria-label="Close About">&times;</Link>
-      <div className="w-full max-w-2xl flex flex-col items-start mt-8 pt-4 min-h-0 pb-32 font-montserrat">
+      <div className="w-full max-w-2xl flex flex-col items-start mt-4 pt-2 min-h-0 pb-40 font-montserrat">
         <h1 className="text-4xl font-extrabold mb-6 font-montserrat">TheArc</h1>
         <p className="text-lg mb-8 text-gray-200 max-w-2xl">
           What if your health wasn’t a burden, but a system?
