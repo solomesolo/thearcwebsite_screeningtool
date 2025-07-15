@@ -71,6 +71,7 @@ export default function DNAParticles() {
         background: "transparent",
         transition: "width 0.2s, height 0.2s",
         display: "block",
+        objectFit: "cover",
       }}
       viewBox={`0 0 ${width} ${height}`}
       preserveAspectRatio="none"
