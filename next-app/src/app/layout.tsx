@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import HeroWithOverlay from "../components/HeroWithOverlay";
 import DNABackground from "../components/DNABackground";
 import { usePathname } from "next/navigation";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           {children}
         </main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
