@@ -6,9 +6,9 @@ export default function Hero() {
     <div className="relative w-full min-h-screen text-white font-montserrat flex flex-col">
       {/* Header: Logo/Menu */}
       <div className="sticky md:fixed top-0 left-0 z-30 w-full pointer-events-none bg-black/80 md:bg-transparent" style={{WebkitBackdropFilter: 'blur(2px)'}}>
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-start w-full px-4 md:px-12 pt-4 md:pt-[5vh] pointer-events-auto">
-          <div className="text-3xl md:text-4xl font-bold tracking-tight text-white select-none">TheArc</div>
-          <nav className="flex flex-row space-x-4 md:flex-col md:space-x-0 md:space-y-2 text-base md:text-lg font-normal items-end md:items-end mt-2 md:mt-0 ml-auto">
+        <div className="flex flex-row justify-between items-start w-full px-4 md:px-12 pt-[5vh] pointer-events-auto">
+          <div className="text-3xl md:text-4xl font-bold tracking-tight text-white select-none mt-0 md:mt-0">TheArc</div>
+          <nav className="flex flex-col space-y-2 text-base md:text-lg font-normal items-end mt-0 md:mt-0 ml-auto">
             <Link href="/about" className="hover:text-fuchsia-400 transition-colors">About</Link>
             <Link href="/contact" className="hover:text-fuchsia-400 transition-colors">Contact</Link>
           </nav>

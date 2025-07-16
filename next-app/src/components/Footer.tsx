@@ -4,10 +4,10 @@ import { usePathname } from "next/navigation";
 
 export default function Footer() {
   const pathname = typeof window !== "undefined" ? window.location.pathname : "";
-  // Hide footer on overlays and on mobile/tablet screens
+  // Show footer on main/hero page for all screens, hide on overlays for mobile/tablet
   const isOverlay = ["/about", "/contact", "/privacy-policy", "/terms"].includes(pathname);
   return (
-    <footer className={`fixed bottom-0 left-0 w-full px-8 py-6 bg-black border-t border-gray-800 flex flex-col md:flex-row items-center justify-between text-gray-400 text-sm z-50 ${isOverlay ? 'hidden md:flex' : 'flex'} hidden sm:flex`}>
+    <footer className={`fixed bottom-0 left-0 w-full px-8 py-6 bg-black border-t border-gray-800 flex flex-col md:flex-row items-center justify-between text-gray-400 text-sm z-50 ${isOverlay ? 'hidden sm:flex' : 'flex'}`}>
       <div className="flex items-center space-x-6 mb-2 md:mb-0">
         <Link href="/privacy-policy" className="hover:text-fuchsia-400 transition-colors">Privacy Policy</Link>
         <Link href="/terms" className="hover:text-fuchsia-400 transition-colors">Terms and Conditions</Link>
