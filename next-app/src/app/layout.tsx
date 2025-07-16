@@ -4,7 +4,7 @@ import "./globals.css";
 import Footer from "../components/Footer";
 import HeroWithOverlay from "../components/HeroWithOverlay";
 import DNABackground from "../components/DNABackground";
-// Static DNA SVG background
+import { usePathname } from "next/navigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,11 +22,14 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
+  // Add bottom padding to main content only on main/hero page
+  const pathname = typeof window !== "undefined" ? window.location.pathname : "";
+  const isOverlay = ["/about", "/contact", "/privacy-policy", "/terms"].includes(pathname);
   return (
     <html lang="en">
       <body className={"font-montserrat antialiased bg-black min-h-screen flex flex-col"}>
         <DNABackground />
-        <main className="flex-1 flex flex-col relative z-10">
+        <main className={`flex-1 flex flex-col relative z-10 ${!isOverlay ? 'pb-32' : ''}`}>
           <HeroWithOverlay />
           {children}
         </main>
