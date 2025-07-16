@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
         "First Name": { title: [{ text: { content: data.firstName || "" } }] },
         "Last Name": { rich_text: [{ text: { content: data.lastName || "" } }] },
         "Email": { email: data.email || "" },
-        "Message": { rich_text: [{ text: { content: data.message || "" } }] }
+        "Message": { rich_text: [{ text: { content: data.reason || "" } }] }
       }
     });
     return NextResponse.json({ message: "Registration successful!" });
