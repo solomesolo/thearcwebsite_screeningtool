@@ -12,7 +12,10 @@
     "@notionhq/client": "^4.0.1",
     "next": "15.4.1",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "react-tsparticles": "^2.12.2",
+    "tsparticles-engine": "^2.12.0",
+    "tsparticles-preset-links": "^2.12.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

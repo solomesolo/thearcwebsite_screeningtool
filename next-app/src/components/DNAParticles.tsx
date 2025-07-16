@@ -9,17 +9,21 @@ const COLOR = "#d946ef";
 
 export default function DNAParticles() {
   const ref = useRef<SVGSVGElement | null>(null);
-  const [dimensions, setDimensions] = useState({ width: typeof window !== "undefined" ? window.innerWidth : 1920, height: typeof window !== "undefined" ? window.innerHeight : 1080 });
+  const [dimensions, setDimensions] = useState({ width: 1920, height: 1080 });
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     function handleResize() {
       setDimensions({ width: window.innerWidth, height: window.innerHeight });
     }
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
+    if (!mounted) return;
     let frame: number;
     const svg = ref.current;
     if (!svg) return;
@@ -49,7 +53,9 @@ export default function DNAParticles() {
     }
     frame = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(frame);
-  }, [dimensions]);
+  }, [dimensions, mounted]);
+
+  if (!mounted) return null;
 
   const width = dimensions.width;
   const height = dimensions.height;

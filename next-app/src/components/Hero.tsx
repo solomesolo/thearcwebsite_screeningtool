@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <div className="relative w-full min-h-screen bg-black text-white font-montserrat flex flex-col">
+    <div className="relative w-full min-h-screen text-white font-montserrat flex flex-col">
       {/* Header: Logo/Menu */}
       <div className="sticky md:fixed top-0 left-0 z-30 w-full pointer-events-none bg-black/80 md:bg-transparent" style={{WebkitBackdropFilter: 'blur(2px)'}}>
         <div className="flex flex-col md:flex-row justify-between items-start md:items-start w-full px-4 md:px-12 pt-4 md:pt-[5vh] pointer-events-auto">
