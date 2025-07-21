@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import DNAParticles from "../components/DNAParticles";
+import DNABackground from "../components/DNABackground";
 import React, { useRef, useState, useEffect } from "react";
 
 export default function Home() {
@@ -9,7 +10,13 @@ export default function Home() {
     <div className="w-full min-h-screen bg-black text-white font-montserrat">
       {/* Hero Section (Header) */}
       <section className="relative flex flex-col items-center justify-center min-h-screen h-screen w-full overflow-hidden px-4 md:px-8 py-4 md:py-8">
-        <DNAParticles />
+        {/* Show DNAParticles on desktop, DNABackground on mobile */}
+        <div className="hidden md:block w-full h-full absolute top-0 left-0 z-0">
+          <DNAParticles />
+        </div>
+        <div className="block md:hidden w-full h-full absolute top-0 left-0 z-0">
+          <DNABackground />
+        </div>
         {/* Top Bar */}
         <div className="absolute top-0 left-0 w-full flex items-center justify-between px-8 py-8 z-20">
           <div className="text-xl md:text-2xl font-semibold tracking-tight text-white select-none" style={{letterSpacing: '-0.02em'}}>TheArc</div>
@@ -366,9 +373,9 @@ function ArcPricing() {
           </ul>
         </div>
       </div>
-      <div className="w-full max-w-5xl mt-10 md:mt-14 grid grid-cols-1 md:grid-cols-3 gap-6 mx-auto">
+      <div className="w-full max-w-5xl mt-10 md:mt-14 grid grid-cols-1 md:grid-cols-3 gap-6 mx-auto items-stretch">
         {/* Card 1 */}
-        <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-black/70 border border-fuchsia-700 transition-all duration-300 transform hover:scale-105 cursor-pointer">
+        <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-black/70 border border-fuchsia-700 min-h-[220px] max-h-[220px] min-w-[320px] max-w-[400px] transition-all duration-300 transform hover:scale-105 cursor-pointer">
           <div className="bg-gradient-to-br from-fuchsia-700 via-fuchsia-500 to-purple-700 rounded-xl p-4 mb-4 flex items-center justify-center">
             {/* Lab icon */}
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="#d946ef" className="w-8 h-8"><path strokeLinecap="round" strokeLinejoin="round" d="M7 4v2a2 2 0 01-2 2v2a7 7 0 007 7 7 7 0 007-7V8a2 2 0 01-2-2V4" /><circle cx="12" cy="17" r="2" /></svg>
@@ -377,7 +384,7 @@ function ArcPricing() {
           <div className="text-fuchsia-100 text-sm md:text-base" style={{fontFamily: 'Montserrat, ui-sans-serif'}}>Available via our partner marketplace at exclusive rates.</div>
         </div>
         {/* Card 2 (highlighted) */}
-        <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-black/80 border-2 border-fuchsia-400 shadow-xl scale-105 z-10 transition-all duration-300 transform hover:scale-110 cursor-pointer">
+        <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-black/80 border-2 border-fuchsia-400 shadow-xl scale-105 z-10 min-h-[220px] max-h-[220px] min-w-[320px] max-w-[400px] transition-all duration-300 transform hover:scale-110 cursor-pointer">
           <div className="bg-gradient-to-br from-fuchsia-700 via-fuchsia-500 to-purple-700 rounded-xl p-4 mb-4 flex items-center justify-center">
             {/* Lock icon */}
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="#d946ef" className="w-8 h-8"><rect x="6" y="10" width="12" height="8" rx="2" /><path strokeLinecap="round" strokeLinejoin="round" d="M8 10V7a4 4 0 118 0v3" /></svg>
@@ -386,7 +393,7 @@ function ArcPricing() {
           <div className="text-fuchsia-100 text-sm md:text-base" style={{fontFamily: 'Montserrat, ui-sans-serif'}}>All member data is private and portable - shareable with your own practitioners if needed.</div>
         </div>
         {/* Card 3 */}
-        <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-black/70 border border-fuchsia-700 transition-all duration-300 transform hover:scale-105 cursor-pointer">
+        <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-black/70 border border-fuchsia-700 min-h-[220px] max-h-[220px] min-w-[320px] max-w-[400px] transition-all duration-300 transform hover:scale-105 cursor-pointer">
           <div className="bg-gradient-to-br from-fuchsia-700 via-fuchsia-500 to-purple-700 rounded-xl p-4 mb-4 flex items-center justify-center">
             {/* Heart icon */}
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="#d946ef" className="w-8 h-8"><path strokeLinecap="round" strokeLinejoin="round" d="M12 21C12 21 4 13.5 4 8.5C4 5.46243 6.46243 3 9.5 3C11.1566 3 12.7357 3.84285 13.5 5.08713C14.2643 3.84285 15.8434 3 17.5 3C20.5376 3 23 5.46243 23 8.5C23 13.5 15 21 15 21H12Z" /></svg>
@@ -411,14 +418,14 @@ function BuiltForSection() {
   return (
     <section className="w-full bg-black py-16 md:py-24 flex flex-col md:flex-row items-center justify-center gap-8 max-w-[1400px] mx-auto">
       {/* Left: Text List */}
-      <div className="flex-1 max-w-xl flex flex-col justify-center items-start px-4 md:px-0">
-        <h2 className="text-2xl md:text-4xl font-extrabold text-white mb-6" style={{fontFamily: 'Montserrat, ui-sans-serif'}}>Built for Those Who:</h2>
-        <ul className="space-y-5 w-full">
-          <li className="flex items-start gap-3 text-lg md:text-xl text-white/90"><span className="text-fuchsia-400 text-base mt-1">●</span>Seek clarity over confusion</li>
-          <li className="flex items-start gap-3 text-lg md:text-xl text-white/90"><span className="text-fuchsia-400 text-base mt-1">●</span>Prefer evidence over hype</li>
-          <li className="flex items-start gap-3 text-lg md:text-xl text-white/90"><span className="text-fuchsia-400 text-base mt-1">●</span>Want a system, not tasks</li>
-          <li className="flex items-start gap-3 text-lg md:text-xl text-white/90"><span className="text-fuchsia-400 text-base mt-1">●</span>Aspire to long-term vitality, not quick fixes</li>
-          <li className="flex items-start gap-3 text-lg md:text-xl text-white/90"><span className="text-fuchsia-400 text-base mt-1">●</span>Value alignment - with their body, biology, and goals</li>
+      <div className="flex-1 max-w-xl flex flex-col justify-center items-center md:items-start px-4 md:px-0 text-center md:text-left">
+        <h2 className="text-2xl md:text-4xl font-extrabold text-white mb-6 font-montserrat text-center md:text-left">Built for Those Who:</h2>
+        <ul className="space-y-5 w-full flex flex-col items-center md:items-start text-center md:text-left">
+          <li className="flex items-start gap-3 text-lg md:text-xl text-white/90 justify-center md:justify-start"><span className="text-fuchsia-400 text-base mt-1">●</span>Seek clarity over confusion</li>
+          <li className="flex items-start gap-3 text-lg md:text-xl text-white/90 justify-center md:justify-start"><span className="text-fuchsia-400 text-base mt-1">●</span>Prefer evidence over hype</li>
+          <li className="flex items-start gap-3 text-lg md:text-xl text-white/90 justify-center md:justify-start"><span className="text-fuchsia-400 text-base mt-1">●</span>Want a system, not tasks</li>
+          <li className="flex items-start gap-3 text-lg md:text-xl text-white/90 justify-center md:justify-start"><span className="text-fuchsia-400 text-base mt-1">●</span>Aspire to long-term vitality, not quick fixes</li>
+          <li className="flex items-start gap-3 text-lg md:text-xl text-white/90 justify-center md:justify-start"><span className="text-fuchsia-400 text-base mt-1">●</span>Value alignment - with their body, biology, and goals</li>
         </ul>
       </div>
       {/* Right: Body + Metrics, now responsive */}
@@ -434,37 +441,65 @@ function BuiltForSection() {
           <span className="absolute left-1/2 top-[150px] md:top-[300px] -translate-x-1/2 z-10 animate-pulse"><span className="block w-3 md:w-8 h-3 md:h-8 rounded-full bg-purple-300 shadow-lg border-2 border-purple-400" /></span>
         </div>
         {/* Metric Cards to the right, can overlap image on mobile/tablet */}
-        <div className="flex flex-col gap-2 md:gap-4 w-full md:w-auto -ml-8 md:ml-0 z-20">
-          {/* Overall Health Checkup */}
-          <div className="rounded-2xl border-2 border-fuchsia-400 px-3 py-2 md:px-4 md:py-2 flex flex-col items-start shadow-md bg-black/80 w-full max-w-xs mx-auto">
-            <div className="text-fuchsia-200 font-bold text-base md:text-lg mb-1">Overall Health Checkup</div>
-            <div className="text-white text-base md:text-lg font-semibold">5 of 8 needed done</div>
-          </div>
-          {/* Perceived Recovery Quality */}
-          <div className="rounded-2xl border-2 border-fuchsia-300 px-3 py-2 md:px-4 md:py-2 flex flex-col items-start shadow-md bg-black/80 w-full max-w-xs mx-auto">
-            <div className="text-fuchsia-200 font-bold text-xs md:text-sm mb-1">Perceived Recovery Quality</div>
-            <div className="text-white text-sm md:text-base font-bold">7/10</div>
-          </div>
-          {/* Meal Resilience Score */}
-          <div className="rounded-2xl border-2 border-yellow-300 px-3 py-2 md:px-4 md:py-2 flex flex-col items-start shadow-md bg-black/80 w-full max-w-xs mx-auto">
-            <div className="text-yellow-200 font-bold text-xs md:text-sm mb-1">Meal Resilience Score</div>
-            <div className="text-white text-sm md:text-base font-bold">8/10</div>
-          </div>
-          {/* Circadian Consistency Index */}
-          <div className="rounded-2xl border-2 border-green-300 px-3 py-2 md:px-4 md:py-2 flex flex-col items-start shadow-md bg-black/80 w-full max-w-xs mx-auto">
-            <div className="text-green-200 font-bold text-xs md:text-sm mb-1">Circadian Consistency Index</div>
-            <div className="text-white text-sm md:text-base font-bold">6/10</div>
-          </div>
-          {/* Cognitive Clarity Index */}
-          <div className="rounded-2xl border-2 border-blue-300 px-3 py-2 md:px-4 md:py-2 flex flex-col items-start shadow-md bg-black/80 w-full max-w-xs mx-auto">
-            <div className="text-blue-200 font-bold text-xs md:text-sm mb-1">Cognitive Clarity Index</div>
-            <div className="text-white text-sm md:text-base font-bold">9/10</div>
-          </div>
-          {/* Inner Rhythm Coherence */}
-          <div className="rounded-2xl border-2 border-purple-300 px-3 py-2 md:px-4 md:py-2 flex flex-col items-start shadow-md bg-black/80 w-full max-w-xs mx-auto">
-            <div className="text-purple-200 font-bold text-xs md:text-sm mb-1">Inner Rhythm Coherence</div>
-            <div className="text-white text-sm md:text-base font-bold">5/10</div>
-          </div>
+        <div className="flex flex-col gap-2 md:gap-4 w-full md:w-auto -ml-8 md:ml-0 z-20 items-center md:items-start text-center md:text-left">
+          {[
+            {
+              border: 'border-fuchsia-400',
+              label: 'Overall Health Checkup',
+              value: '5 of 8 needed done',
+              color: 'text-fuchsia-200',
+              valueColor: 'text-white',
+              box: 0,
+            },
+            {
+              border: 'border-fuchsia-300',
+              label: 'Perceived Recovery Quality',
+              value: '7/10',
+              color: 'text-fuchsia-200',
+              valueColor: 'text-white',
+              box: 1,
+            },
+            {
+              border: 'border-yellow-300',
+              label: 'Meal Resilience Score',
+              value: '8/10',
+              color: 'text-yellow-200',
+              valueColor: 'text-white',
+              box: 2,
+            },
+            {
+              border: 'border-green-300',
+              label: 'Circadian Consistency Index',
+              value: '6/10',
+              color: 'text-green-200',
+              valueColor: 'text-white',
+              box: 3,
+            },
+            {
+              border: 'border-blue-300',
+              label: 'Cognitive Clarity Index',
+              value: '9/10',
+              color: 'text-blue-200',
+              valueColor: 'text-white',
+              box: 4,
+            },
+            {
+              border: 'border-purple-300',
+              label: 'Inner Rhythm Coherence',
+              value: '5/10',
+              color: 'text-purple-200',
+              valueColor: 'text-white',
+              box: 5,
+            },
+          ].map((item, idx) => (
+            <div
+              key={item.label}
+              className={`rounded-2xl border-2 px-3 py-2 md:px-4 md:py-2 flex flex-col items-center md:items-start shadow-md bg-black/80 w-full max-w-xs mx-auto transition-all duration-300 ${item.border} ${activeBox === item.box ? 'sparkle-box' : 'blurred-box'}`}
+            >
+              <div className={`${item.color} font-bold text-base md:text-lg mb-1`}>{item.label}</div>
+              <div className={`${item.valueColor} text-base md:text-lg font-semibold`}>{item.value}</div>
+            </div>
+          ))}
         </div>
       </div>
       <style jsx>{`

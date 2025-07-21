@@ -33,7 +33,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body className={`${montserrat.variable} font-montserrat antialiased bg-black min-h-screen flex flex-col`}>
-        <DNABackground />
         <MainLayoutClient>
           {children}
         </MainLayoutClient>
