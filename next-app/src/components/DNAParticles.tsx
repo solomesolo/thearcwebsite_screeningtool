@@ -3,7 +3,11 @@
 import React, { useEffect, useRef, useState } from "react";
 
 const NUM_PARTICLES = 180;
-const AMPLITUDE_RATIO = 0.22;
+function getAmplitudeRatio(width: number) {
+  if (width < 600) return 0.32; // mobile
+  if (width < 900) return 0.26; // tablet
+  return 0.22; // desktop
+}
 const SPEED = 0.0005;
 const COLOR = "#d946ef";
 
@@ -30,7 +34,7 @@ export default function DNAParticles() {
     const particles = Array.from(svg.querySelectorAll("circle"));
     const width = dimensions.width;
     const height = dimensions.height;
-    const amplitude = height * AMPLITUDE_RATIO;
+    const amplitude = height * getAmplitudeRatio(width);
     const yOffset = height / 2;
     const xStart = 0;
     const xEnd = width;

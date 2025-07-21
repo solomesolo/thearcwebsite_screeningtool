@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div className="w-full min-h-screen bg-black text-white font-montserrat">
       {/* Hero Section (Header) */}
-      <section className="relative flex flex-col items-center justify-center min-h-screen h-screen w-full overflow-hidden">
+      <section className="relative flex flex-col items-center justify-center min-h-screen h-screen w-full overflow-hidden px-4 md:px-8 py-4 md:py-8">
         <DNAParticles />
         {/* Top Bar */}
         <div className="absolute top-0 left-0 w-full flex items-center justify-between px-8 py-8 z-20">
@@ -18,15 +18,15 @@ export default function Home() {
           </nav>
         </div>
         {/* Hero Content */}
-        <div className="flex flex-col items-center justify-center text-center z-10 mt-24">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 leading-tight max-w-3xl mx-auto" style={{textShadow: '0 2px 24px #000', letterSpacing: '-0.01em'}}>
+        <div className="flex flex-col items-center justify-center text-center z-10 mt-12 md:mt-24">
+          <h1 className="text-2xl md:text-4xl lg:text-5xl font-extrabold mb-6 md:mb-8 leading-tight max-w-3xl mx-auto font-montserrat" style={{textShadow: '0 2px 24px #000', letterSpacing: '-0.01em'}}>
             Longevity isn’t a product. It’s a process.<br />
             Most people drift — we create structure, clarity, and belonging.
           </h1>
-          <p className="text-base md:text-lg font-normal mb-10 max-w-xl mx-auto text-white/90">A private longevity circle guided by science, precision, and deep personalization.<br />Built around you. Evolving with you.<br />Each cohort limited to 100 people.</p>
-          <Link href="/contact" className="inline-flex items-center px-8 py-4 rounded-full text-base font-semibold bg-gradient-to-r from-fuchsia-800 via-fuchsia-600 to-fuchsia-400 text-white shadow-lg border-2 border-fuchsia-700 hover:scale-105 transition-all">
+          <p className="text-base md:text-lg font-normal mb-6 md:mb-10 max-w-xl mx-auto text-white/90 font-montserrat">A private longevity circle guided by science, precision, and deep personalization.<br />Built around you. Evolving with you.<br />Each cohort limited to 100 people.</p>
+          <Link href="/contact" className="inline-flex items-center px-4 py-2 md:px-8 md:py-4 rounded-full text-base md:text-lg font-semibold bg-gradient-to-r from-fuchsia-800 via-fuchsia-600 to-fuchsia-400 text-white shadow-lg border-2 border-fuchsia-700 hover:scale-105 transition-all font-montserrat">
             Apply to Join
-            <span className="ml-3 text-2xl">&rarr;</span>
+            <span className="ml-2 md:ml-3 text-lg md:text-2xl">&rarr;</span>
           </Link>
         </div>
       </section>
@@ -231,73 +231,51 @@ function ArcFeatures() {
   const handleRight = () => scrollToIndex((active + 1) % features.length);
 
   return (
-    <section className="w-full bg-black py-10 md:py-16 flex flex-col items-center">
-      <h2 className="text-2xl md:text-4xl font-semibold md:font-extrabold text-white text-center mb-3 md:mb-6 tracking-tight" style={{fontFamily: 'Montserrat, ui-sans-serif'}}>Inside The Arc</h2>
-      <p className="text-sm md:text-base text-white/80 text-center max-w-4xl mb-6 md:mb-10 font-normal md:font-medium" style={{fontFamily: 'Montserrat, ui-sans-serif'}}>
+    <section className="w-full bg-black py-8 md:py-16 flex flex-col items-center px-2 md:px-0">
+      <h2 className="text-xl md:text-4xl font-extrabold text-white text-center mb-4 md:mb-8 font-montserrat">Inside The Arc</h2>
+      <p className="text-sm md:text-base text-white/80 text-center max-w-4xl mb-4 md:mb-10 font-normal md:font-medium font-montserrat">
         A full year of structure, support, and expert-led guidance — tailored to your real life.<br />
         No generic plans. No pressure to perform. Just the tools to take better care of your body, in a way that lasts.
       </p>
       {/* Desktop: grid, Mobile: scroll */}
-      <div className="hidden md:grid grid-cols-3 gap-8 w-full max-w-7xl px-4">
+      <div className="hidden md:grid grid-cols-3 gap-4 md:gap-8 w-full max-w-7xl px-2 md:px-4">
         {features.map((f, i) => (
           <div
             key={i}
-            className={`relative flex flex-col items-start p-8 rounded-3xl shadow-xl border-2 text-left min-h-[260px] bg-black/60 backdrop-blur-md transition-all duration-300 cursor-pointer
-              ${active === i ? 'scale-105 z-10 bg-gradient-to-br from-fuchsia-700 via-fuchsia-600 to-purple-600 border-fuchsia-400 text-white shadow-2xl ring-2 ring-fuchsia-400/40' : 'border-white/10 text-white/90 hover:scale-105 hover:z-10 hover:border-fuchsia-400 hover:bg-black/70 hover:shadow-xl'}`}
+            className={`relative flex flex-col items-start p-4 rounded-2xl shadow-md border-2 text-left min-h-[180px] bg-black/80 transition-all duration-300 cursor-pointer font-montserrat
+              ${active === i ? 'scale-105 z-10 bg-gradient-to-br from-fuchsia-700 via-fuchsia-600 to-purple-600 border-fuchsia-400 text-white shadow-2xl ring-2 ring-fuchsia-400/40' : 'border-white/10 text-white/90 hover:scale-105 hover:z-10 hover:border-fuchsia-400 hover:bg-black/60 hover:shadow-xl'}`}
             onMouseEnter={() => setActive(i)}
             onFocus={() => setActive(i)}
             tabIndex={0}
-            style={{fontFamily: 'Montserrat, ui-sans-serif', outline: 'none'}}
+            style={{outline: 'none'}}
           >
-            <span className="absolute top-4 left-4 text-[3rem] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 via-fuchsia-500 to-purple-500 opacity-15 leading-none select-none pointer-events-none">
+            <span className="absolute top-2 left-2 text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 via-fuchsia-500 to-purple-500 opacity-15 leading-none select-none pointer-events-none">
               {f.number}
             </span>
-            <span className="font-semibold md:font-bold text-lg md:text-xl mb-2 tracking-tight text-white mt-2 md:mt-4" style={{zIndex: 10}}>{f.title}</span>
-            <span className="text-base md:text-lg font-normal leading-relaxed text-white/90 mt-1" style={{zIndex: 10}}>{f.content}</span>
+            <span className="font-semibold text-lg mb-2 tracking-tight text-white mt-2 font-montserrat" style={{zIndex: 10}}>{f.title}</span>
+            <span className="text-sm font-normal leading-relaxed text-white/90 mt-1 font-montserrat" style={{zIndex: 10}}>{f.content}</span>
           </div>
         ))}
       </div>
       {/* Mobile: horizontal scroll */}
-      <div className="md:hidden relative w-full max-w-full flex items-center">
-        <button
-          aria-label="Scroll left"
-          onClick={handleLeft}
-          className="absolute left-0 z-20 h-full items-center px-2 text-3xl text-fuchsia-400 hover:text-white transition-colors bg-black/60 rounded-l-2xl"
-          style={{top: 0, bottom: 0}}
-        >
-          &#8592;
-        </button>
-        <div
-          ref={scrollRef}
-          className="flex overflow-x-auto snap-x snap-mandatory gap-6 w-full px-2 py-2 scroll-smooth"
-          style={{scrollBehavior: 'smooth'}}
-        >
-          {features.map((f, i) => (
-            <div
-              key={i}
-              className={`relative flex-shrink-0 w-[85vw] max-w-[420px] min-w-[280px] flex flex-col items-start p-6 rounded-2xl shadow-md border-2 text-left min-h-[180px] bg-black/80 transition-all duration-300 snap-center cursor-pointer
-                ${active === i ? 'scale-105 z-10 bg-gradient-to-br from-fuchsia-700 via-fuchsia-600 to-purple-600 border-fuchsia-400 text-white shadow-2xl ring-2 ring-fuchsia-400/40' : 'border-white/10 text-white/90 hover:scale-105 hover:z-10 hover:border-fuchsia-400 hover:bg-black/60 hover:shadow-xl'}`}
-              onMouseEnter={() => setActive(i)}
-              onFocus={() => setActive(i)}
-              tabIndex={0}
-              style={{fontFamily: 'Montserrat, ui-sans-serif', outline: 'none'}}
-            >
-              <span className="absolute top-4 left-4 text-[2.5rem] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 via-fuchsia-500 to-purple-500 opacity-15 leading-none select-none pointer-events-none">
-                {f.number}
-              </span>
-              <span className="font-semibold md:font-bold text-base md:text-lg mb-2 tracking-tight text-white mt-2 md:mt-4" style={{zIndex: 10}}>{f.title}</span>
-              <span className="text-sm md:text-base font-normal leading-relaxed text-white/90 mt-1" style={{zIndex: 10}}>{f.content}</span>
-            </div>
-          ))}
-        </div>
-        <button
-          aria-label="Scroll right"
-          onClick={handleRight}
-          className="absolute right-0 z-20 h-full items-center px-2 text-3xl text-fuchsia-400 hover:text-white transition-colors bg-black/60 rounded-r-2xl"
-          style={{top: 0, bottom: 0}}
-        >
-          &#8594;
-        </button>
+      <div className="md:hidden flex flex-col gap-4 w-full px-2">
+        {features.map((f, i) => (
+          <div
+            key={i}
+            className={`relative flex flex-col items-start p-4 rounded-2xl shadow-md border-2 text-left min-h-[180px] bg-black/80 transition-all duration-300 cursor-pointer font-montserrat
+              ${active === i ? 'scale-105 z-10 bg-gradient-to-br from-fuchsia-700 via-fuchsia-600 to-purple-600 border-fuchsia-400 text-white shadow-2xl ring-2 ring-fuchsia-400/40' : 'border-white/10 text-white/90 hover:scale-105 hover:z-10 hover:border-fuchsia-400 hover:bg-black/60 hover:shadow-xl'}`}
+            onMouseEnter={() => setActive(i)}
+            onFocus={() => setActive(i)}
+            tabIndex={0}
+            style={{outline: 'none'}}
+          >
+            <span className="absolute top-2 left-2 text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 via-fuchsia-500 to-purple-500 opacity-15 leading-none select-none pointer-events-none">
+              {f.number}
+            </span>
+            <span className="font-semibold text-lg mb-2 tracking-tight text-white mt-2 font-montserrat" style={{zIndex: 10}}>{f.title}</span>
+            <span className="text-sm font-normal leading-relaxed text-white/90 mt-1 font-montserrat" style={{zIndex: 10}}>{f.content}</span>
+          </div>
+        ))}
       </div>
       {/* Dots for mobile navigation */}
       <div className="md:hidden flex justify-center mt-4 gap-2">

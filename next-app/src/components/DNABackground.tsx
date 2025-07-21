@@ -3,9 +3,9 @@ import React from "react";
 
 const WAVE_WIDTH = 1920;
 const WAVE_HEIGHT = 1080;
-const AMPLITUDE = 120; // Height of the wave
+const getAmplitude = () => (typeof window !== "undefined" && window.innerWidth < 600 ? 180 : 120);
+const getYOffset = () => (typeof window !== "undefined" && window.innerWidth < 600 ? 400 : 600);
 const FREQUENCY = 1; // Only one full arc across the width
-const Y_OFFSET = 600; // Vertical center of the wave
 const STROKE_WIDTH = 16;
 
 // Generate a perfectly tiling sine wave path, starting and ending off-canvas
@@ -21,7 +21,9 @@ function generateSineWavePath(width: number, amplitude: number, frequency: numbe
   return `M${points.join(" L")}`;
 }
 
-const sinePath = generateSineWavePath(WAVE_WIDTH, AMPLITUDE, FREQUENCY, Y_OFFSET);
+const sinePath = typeof window !== "undefined"
+  ? generateSineWavePath(WAVE_WIDTH, getAmplitude(), FREQUENCY, getYOffset())
+  : generateSineWavePath(WAVE_WIDTH, 120, FREQUENCY, 600);
 
 const DNABackground: React.FC = () => (
   <div
