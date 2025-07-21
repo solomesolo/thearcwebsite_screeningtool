@@ -260,10 +260,8 @@ function ArcFeatures() {
       {/* Mobile: horizontal scroll */}
       <div className="md:hidden flex flex-col gap-4 w-full px-2">
         {features.map((f, i) => (
-          <div
-            key={i}
-            className={`relative flex flex-col items-start p-4 rounded-2xl shadow-md border-2 text-left min-h-[180px] bg-black/80 transition-all duration-300 cursor-pointer font-montserrat
-              ${active === i ? 'scale-105 z-10 bg-gradient-to-br from-fuchsia-700 via-fuchsia-600 to-purple-600 border-fuchsia-400 text-white shadow-2xl ring-2 ring-fuchsia-400/40' : 'border-white/10 text-white/90 hover:scale-105 hover:z-10 hover:border-fuchsia-400 hover:bg-black/60 hover:shadow-xl'}`}
+          <div key={i} className={`relative flex flex-col items-start p-4 rounded-2xl shadow-md border-2 text-left min-h-[180px] bg-black/80 transition-all duration-300 cursor-pointer font-montserrat
+            ${active === i ? 'scale-105 z-10 bg-gradient-to-br from-fuchsia-700 via-fuchsia-600 to-purple-600 border-fuchsia-400 text-white shadow-2xl ring-2 ring-fuchsia-400/40' : 'border-white/10 text-white/90 hover:scale-105 hover:z-10 hover:border-fuchsia-400 hover:bg-black/60 hover:shadow-xl'}`}
             onMouseEnter={() => setActive(i)}
             onFocus={() => setActive(i)}
             tabIndex={0}
@@ -277,17 +275,6 @@ function ArcFeatures() {
           </div>
         ))}
       </div>
-      {/* Dots for mobile navigation */}
-      <div className="md:hidden flex justify-center mt-4 gap-2">
-        {features.map((_, i) => (
-          <button
-            key={i}
-            className={`w-2.5 h-2.5 rounded-full ${active === i ? 'bg-fuchsia-400' : 'bg-white/30'}`}
-            onClick={() => scrollToIndex(i)}
-            aria-label={`Go to feature ${i + 1}`}
-          />
-        ))}
-      </div>
     </section>
   );
 }
@@ -297,28 +284,27 @@ function BeyondProgramSection() {
     <section className="w-full bg-black py-20 flex flex-col items-center">
       <h2 className="text-2xl md:text-4xl font-extrabold text-white text-center mb-8" style={{fontFamily: 'Montserrat, ui-sans-serif'}}>Beyond the Program: What You’ll Own</h2>
       <div className="w-full max-w-5xl flex flex-col items-center">
-        {/* Top row: 3 boxes */}
-        <div className="flex flex-row justify-center gap-8 w-full mb-8 px-4 md:px-0">
-          <div className="flex-1 max-w-[350px] flex flex-col items-center text-center p-8 rounded-2xl bg-black/60 border-2 border-purple-300 min-w-[260px]">
+        {/* Mobile: stack vertically, Desktop: grid */}
+        <div className="flex flex-col md:flex-row md:justify-center gap-4 md:gap-8 w-full mb-4 md:mb-8 items-center">
+          <div className="w-full max-w-xs md:flex-1 flex flex-col items-center text-center p-4 md:p-8 rounded-2xl bg-black/60 border-2 border-purple-300 min-w-[220px] md:min-w-[260px] min-h-[180px] md:max-w-[350px]">
             <div className="font-bold text-xl text-purple-200 mb-2" style={{fontFamily: 'Montserrat, ui-sans-serif'}}>Clear Health Markers</div>
             <div className="text-white/80 text-base" style={{fontFamily: 'Montserrat, ui-sans-serif'}}>A clear understanding of your health markers and trends</div>
           </div>
-          <div className="flex-1 max-w-[350px] flex flex-col items-center text-center p-8 rounded-2xl bg-black/60 border-2 border-purple-300 min-w-[260px]">
+          <div className="w-full max-w-xs md:flex-1 flex flex-col items-center text-center p-4 md:p-8 rounded-2xl bg-black/60 border-2 border-purple-300 min-w-[220px] md:min-w-[260px] min-h-[180px] md:max-w-[350px]">
             <div className="font-bold text-xl text-purple-200 mb-2" style={{fontFamily: 'Montserrat, ui-sans-serif'}}>Personalized Protocol</div>
             <div className="text-white/80 text-base" style={{fontFamily: 'Montserrat, ui-sans-serif'}}>A personalized, flexible protocol you trust</div>
           </div>
-          <div className="flex-1 max-w-[350px] flex flex-col items-center text-center p-8 rounded-2xl bg-black/60 border-2 border-purple-300 min-w-[260px]">
+          <div className="w-full max-w-xs md:flex-1 flex flex-col items-center text-center p-4 md:p-8 rounded-2xl bg-black/60 border-2 border-purple-300 min-w-[220px] md:min-w-[260px] min-h-[180px] md:max-w-[350px]">
             <div className="font-bold text-xl text-purple-200 mb-2" style={{fontFamily: 'Montserrat, ui-sans-serif'}}>Track Your Biology</div>
             <div className="text-white/80 text-base" style={{fontFamily: 'Montserrat, ui-sans-serif'}}>The ability to track your own biology over time</div>
           </div>
         </div>
-        {/* Bottom row: 2 centered boxes */}
-        <div className="flex flex-row justify-center gap-8 w-full px-4 md:px-0">
-          <div className="flex-1 max-w-[350px] flex flex-col items-center text-center p-8 rounded-2xl bg-black/60 border-2 border-purple-300 min-w-[260px] ml-auto">
+        <div className="flex flex-col md:flex-row md:justify-center gap-4 md:gap-8 w-full items-center">
+          <div className="w-full max-w-xs md:flex-1 flex flex-col items-center text-center p-4 md:p-8 rounded-2xl bg-black/60 border-2 border-purple-300 min-w-[220px] md:min-w-[260px] min-h-[180px] md:max-w-[350px] md:ml-auto">
             <div className="font-bold text-xl text-purple-200 mb-2" style={{fontFamily: 'Montserrat, ui-sans-serif'}}>Data-Informed Habits</div>
             <div className="text-white/80 text-base" style={{fontFamily: 'Montserrat, ui-sans-serif'}}>Data-informed habits that feel intuitive, not forced</div>
           </div>
-          <div className="flex-1 max-w-[350px] flex flex-col items-center text-center p-8 rounded-2xl bg-black/60 border-2 border-purple-300 min-w-[260px] mr-auto">
+          <div className="w-full max-w-xs md:flex-1 flex flex-col items-center text-center p-4 md:p-8 rounded-2xl bg-black/60 border-2 border-purple-300 min-w-[220px] md:min-w-[260px] min-h-[180px] md:max-w-[350px] md:mr-auto">
             <div className="font-bold text-xl text-purple-200 mb-2" style={{fontFamily: 'Montserrat, ui-sans-serif'}}>Evolving Foundation</div>
             <div className="text-white/80 text-base" style={{fontFamily: 'Montserrat, ui-sans-serif'}}>A clear health foundation you can evolve independently or with your provider</div>
           </div>
@@ -344,9 +330,9 @@ function ArcPricing() {
   return (
     <section className="w-full bg-black py-14 md:py-20 flex flex-col items-center">
       <h2 className="text-3xl md:text-5xl font-extrabold text-white text-center mb-8" style={{fontFamily: 'Montserrat, ui-sans-serif'}}>The Arc: Program Options</h2>
-      <div className="flex flex-col md:flex-row gap-8 md:gap-12 w-full max-w-4xl justify-center items-stretch mb-10">
+      <div className="flex flex-col md:flex-row gap-8 md:gap-12 w-full max-w-4xl justify-center items-center mb-10">
         {/* Foundations Card */}
-        <div className="flex-1 bg-white/5 border-2 border-white/10 rounded-3xl shadow-xl p-8 flex flex-col items-start justify-between min-w-[300px] max-w-[400px] transition-all duration-300 transform hover:scale-105 hover:bg-gradient-to-br hover:from-fuchsia-800 hover:via-fuchsia-600 hover:to-purple-700 hover:border-fuchsia-400 hover:shadow-2xl cursor-pointer" style={{fontFamily: 'Montserrat, ui-sans-serif'}}>
+        <div className="flex-1 bg-white/5 border-2 border-white/10 rounded-3xl shadow-xl p-8 flex flex-col items-start justify-between min-h-[420px] min-w-[320px] max-w-[400px] mx-auto transition-all duration-300 transform hover:scale-105 hover:bg-gradient-to-br hover:from-fuchsia-800 hover:via-fuchsia-600 hover:to-purple-700 hover:border-fuchsia-400 hover:shadow-2xl cursor-pointer" style={{fontFamily: 'Montserrat, ui-sans-serif'}}>
           <div className="flex items-center mb-2">
             <span className="uppercase text-xs font-semibold tracking-widest text-white/90">The Arc: Foundations</span>
           </div>
@@ -363,7 +349,7 @@ function ArcPricing() {
           </ul>
         </div>
         {/* Full Program Card */}
-        <div className="flex-1 bg-white/5 border-2 border-white/10 rounded-3xl shadow-xl p-8 flex flex-col items-start justify-between min-w-[300px] max-w-[400px] transition-all duration-300 transform hover:scale-105 hover:bg-gradient-to-br hover:from-fuchsia-800 hover:via-fuchsia-600 hover:to-purple-700 hover:border-fuchsia-400 hover:shadow-2xl cursor-pointer" style={{fontFamily: 'Montserrat, ui-sans-serif'}}>
+        <div className="flex-1 bg-white/5 border-2 border-white/10 rounded-3xl shadow-xl p-8 flex flex-col items-start justify-between min-h-[420px] min-w-[320px] max-w-[400px] mx-auto transition-all duration-300 transform hover:scale-105 hover:bg-gradient-to-br hover:from-fuchsia-800 hover:via-fuchsia-600 hover:to-purple-700 hover:border-fuchsia-400 hover:shadow-2xl cursor-pointer" style={{fontFamily: 'Montserrat, ui-sans-serif'}}>
           <div className="flex items-center mb-2">
             <span className="uppercase text-xs font-semibold tracking-widest text-white/90">The Arc: Full Program</span>
           </div>
@@ -423,7 +409,7 @@ function BuiltForSection() {
     return () => clearInterval(interval);
   }, []);
   return (
-    <section className="w-full bg-black py-16 md:py-24 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 max-w-[1400px] mx-auto">
+    <section className="w-full bg-black py-16 md:py-24 flex flex-col md:flex-row items-center justify-center gap-8 max-w-[1400px] mx-auto">
       {/* Left: Text List */}
       <div className="flex-1 max-w-xl flex flex-col justify-center items-start px-4 md:px-0">
         <h2 className="text-2xl md:text-4xl font-extrabold text-white mb-6" style={{fontFamily: 'Montserrat, ui-sans-serif'}}>Built for Those Who:</h2>
@@ -435,61 +421,49 @@ function BuiltForSection() {
           <li className="flex items-start gap-3 text-lg md:text-xl text-white/90"><span className="text-fuchsia-400 text-base mt-1">●</span>Value alignment - with their body, biology, and goals</li>
         </ul>
       </div>
-      {/* Right: Body + Metrics, now wider and fully connected */}
-      <div className="flex-1 flex flex-row items-center justify-center gap-8 w-full max-w-3xl min-w-[600px] relative">
-        {/* Human Body Image with overlay */}
-        <div className="relative flex flex-col items-center justify-center min-w-[220px] h-[520px]" style={{background: 'rgba(0,0,0,0.2)'}}>
-          <img src="/human-body.png" alt="Human Body" className="absolute top-0 left-1/2 -translate-x-1/2 w-[220px] h-[520px] object-contain z-0" />
+      {/* Right: Body + Metrics, now responsive */}
+      <div className="flex-1 flex flex-row items-center justify-center gap-2 md:gap-6 w-full max-w-3xl relative">
+        {/* Human Body Image always on the left, cards overlap on mobile/tablet */}
+        <div className="relative flex flex-col items-center justify-center w-[90px] md:w-[220px] h-[180px] md:h-[520px] shrink-0 z-10" style={{background: 'rgba(0,0,0,0.2)'}}>
+          <img src="/human-body.png" alt="Human Body" className="w-[90px] md:w-[220px] h-[180px] md:h-[520px] object-contain z-0" />
           {/* Overlay dots */}
-          <span className="absolute left-[50%] top-[55px] -translate-x-1/2 z-10 animate-pulse"><span className="block w-8 h-8 rounded-full bg-fuchsia-300 shadow-lg border-2 border-fuchsia-400" /></span>
-          <span className="absolute left-[50%] top-[150px] -translate-x-1/2 z-10 animate-pulse"><span className="block w-8 h-8 rounded-full bg-yellow-300 shadow-lg border-2 border-yellow-400" /></span>
-          <span className="absolute left-[50%] top-[250px] -translate-x-1/2 z-10 animate-pulse"><span className="block w-8 h-8 rounded-full bg-green-300 shadow-lg border-2 border-green-400" /></span>
-          <span className="absolute left-[50%] top-[350px] -translate-x-1/2 z-10 animate-pulse"><span className="block w-8 h-8 rounded-full bg-blue-300 shadow-lg border-2 border-blue-400" /></span>
-          <span className="absolute left-[50%] top-[450px] -translate-x-1/2 z-10 animate-pulse"><span className="block w-8 h-8 rounded-full bg-purple-300 shadow-lg border-2 border-purple-400" /></span>
+          <span className="absolute left-1/2 top-[18px] md:top-[36px] -translate-x-1/2 z-10 animate-pulse"><span className="block w-3 md:w-8 h-3 md:h-8 rounded-full bg-fuchsia-300 shadow-lg border-2 border-fuchsia-400" /></span>
+          <span className="absolute left-1/2 top-[50px] md:top-[100px] -translate-x-1/2 z-10 animate-pulse"><span className="block w-3 md:w-8 h-3 md:h-8 rounded-full bg-yellow-300 shadow-lg border-2 border-yellow-400" /></span>
+          <span className="absolute left-1/2 top-[85px] md:top-[170px] -translate-x-1/2 z-10 animate-pulse"><span className="block w-3 md:w-8 h-3 md:h-8 rounded-full bg-green-300 shadow-lg border-2 border-green-400" /></span>
+          <span className="absolute left-1/2 top-[120px] md:top-[240px] -translate-x-1/2 z-10 animate-pulse"><span className="block w-3 md:w-8 h-3 md:h-8 rounded-full bg-blue-300 shadow-lg border-2 border-blue-400" /></span>
+          <span className="absolute left-1/2 top-[150px] md:top-[300px] -translate-x-1/2 z-10 animate-pulse"><span className="block w-3 md:w-8 h-3 md:h-8 rounded-full bg-purple-300 shadow-lg border-2 border-purple-400" /></span>
         </div>
-        {/* Metric Boxes - scattered/chaotic layout, no lines or borders over body */}
-        <div className="absolute w-full h-full pointer-events-none">
+        {/* Metric Cards to the right, can overlap image on mobile/tablet */}
+        <div className="flex flex-col gap-2 md:gap-4 w-full md:w-auto -ml-8 md:ml-0 z-20">
           {/* Overall Health Checkup */}
-          <div className={`absolute left-[60%] top-[5%] w-[220px] pointer-events-auto transition-all duration-500 ${activeBox === 0 ? 'sparkle-box' : 'blurred-box'}`}>
-            <div className="rounded-2xl border-2 border-fuchsia-400 px-4 py-2 flex flex-col items-start shadow-md bg-black/80 w-full">
-              <div className="text-fuchsia-200 font-bold text-base md:text-lg mb-1">Overall Health Checkup</div>
-              <div className="text-white text-base md:text-lg font-semibold">5 of 8 needed done</div>
-            </div>
+          <div className="rounded-2xl border-2 border-fuchsia-400 px-3 py-2 md:px-4 md:py-2 flex flex-col items-start shadow-md bg-black/80 w-full max-w-xs mx-auto">
+            <div className="text-fuchsia-200 font-bold text-base md:text-lg mb-1">Overall Health Checkup</div>
+            <div className="text-white text-base md:text-lg font-semibold">5 of 8 needed done</div>
           </div>
           {/* Perceived Recovery Quality */}
-          <div className={`absolute left-[70%] top-[18%] w-[220px] pointer-events-auto transition-all duration-500 ${activeBox === 1 ? 'sparkle-box' : 'blurred-box'}`}>
-            <div className="rounded-2xl border-2 border-fuchsia-300 px-4 py-2 flex flex-col items-start shadow-md bg-black/80 w-full">
-              <div className="text-fuchsia-200 font-bold text-xs md:text-sm mb-1">Perceived Recovery Quality</div>
-              <div className="text-white text-sm md:text-base font-bold">7/10</div>
-            </div>
+          <div className="rounded-2xl border-2 border-fuchsia-300 px-3 py-2 md:px-4 md:py-2 flex flex-col items-start shadow-md bg-black/80 w-full max-w-xs mx-auto">
+            <div className="text-fuchsia-200 font-bold text-xs md:text-sm mb-1">Perceived Recovery Quality</div>
+            <div className="text-white text-sm md:text-base font-bold">7/10</div>
           </div>
           {/* Meal Resilience Score */}
-          <div className={`absolute left-[80%] top-[32%] w-[220px] pointer-events-auto transition-all duration-500 ${activeBox === 2 ? 'sparkle-box' : 'blurred-box'}`}>
-            <div className="rounded-2xl border-2 border-yellow-300 px-4 py-2 flex flex-col items-start shadow-md bg-black/80 w-full">
-              <div className="text-yellow-200 font-bold text-xs md:text-sm mb-1">Meal Resilience Score</div>
-              <div className="text-white text-sm md:text-base font-bold">8/10</div>
-            </div>
+          <div className="rounded-2xl border-2 border-yellow-300 px-3 py-2 md:px-4 md:py-2 flex flex-col items-start shadow-md bg-black/80 w-full max-w-xs mx-auto">
+            <div className="text-yellow-200 font-bold text-xs md:text-sm mb-1">Meal Resilience Score</div>
+            <div className="text-white text-sm md:text-base font-bold">8/10</div>
           </div>
           {/* Circadian Consistency Index */}
-          <div className={`absolute left-[68%] top-[55%] w-[220px] pointer-events-auto transition-all duration-500 ${activeBox === 3 ? 'sparkle-box' : 'blurred-box'}`}>
-            <div className="rounded-2xl border-2 border-green-300 px-4 py-2 flex flex-col items-start shadow-md bg-black/80 w-full">
-              <div className="text-green-200 font-bold text-xs md:text-sm mb-1">Circadian Consistency Index</div>
-              <div className="text-white text-sm md:text-base font-bold">6/10</div>
-            </div>
+          <div className="rounded-2xl border-2 border-green-300 px-3 py-2 md:px-4 md:py-2 flex flex-col items-start shadow-md bg-black/80 w-full max-w-xs mx-auto">
+            <div className="text-green-200 font-bold text-xs md:text-sm mb-1">Circadian Consistency Index</div>
+            <div className="text-white text-sm md:text-base font-bold">6/10</div>
           </div>
           {/* Cognitive Clarity Index */}
-          <div className={`absolute left-[55%] top-[70%] w-[220px] pointer-events-auto transition-all duration-500 ${activeBox === 4 ? 'sparkle-box' : 'blurred-box'}`}>
-            <div className="rounded-2xl border-2 border-blue-300 px-4 py-2 flex flex-col items-start shadow-md bg-black/80 w-full">
-              <div className="text-blue-200 font-bold text-xs md:text-sm mb-1">Cognitive Clarity Index</div>
-              <div className="text-white text-sm md:text-base font-bold">9/10</div>
-            </div>
+          <div className="rounded-2xl border-2 border-blue-300 px-3 py-2 md:px-4 md:py-2 flex flex-col items-start shadow-md bg-black/80 w-full max-w-xs mx-auto">
+            <div className="text-blue-200 font-bold text-xs md:text-sm mb-1">Cognitive Clarity Index</div>
+            <div className="text-white text-sm md:text-base font-bold">9/10</div>
           </div>
           {/* Inner Rhythm Coherence */}
-          <div className={`absolute left-[75%] top-[85%] w-[220px] pointer-events-auto transition-all duration-500 ${activeBox === 5 ? 'sparkle-box' : 'blurred-box'}`}>
-            <div className="rounded-2xl border-2 border-purple-300 px-4 py-2 flex flex-col items-start shadow-md bg-black/80 w-full">
-              <div className="text-purple-200 font-bold text-xs md:text-sm mb-1">Inner Rhythm Coherence</div>
-              <div className="text-white text-sm md:text-base font-bold">5/10</div>
-            </div>
+          <div className="rounded-2xl border-2 border-purple-300 px-3 py-2 md:px-4 md:py-2 flex flex-col items-start shadow-md bg-black/80 w-full max-w-xs mx-auto">
+            <div className="text-purple-200 font-bold text-xs md:text-sm mb-1">Inner Rhythm Coherence</div>
+            <div className="text-white text-sm md:text-base font-bold">5/10</div>
           </div>
         </div>
       </div>
