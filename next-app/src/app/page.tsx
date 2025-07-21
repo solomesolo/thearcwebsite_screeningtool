@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div className="w-full min-h-screen bg-black text-white font-montserrat">
       {/* Hero Section (Header) */}
-      <section className="relative flex flex-col items-center justify-center min-h-screen h-screen w-full overflow-hidden px-4 md:px-8 py-4 md:py-8">
+      <section className="relative flex flex-col items-center justify-center w-full overflow-hidden px-4 md:px-8 py-4 md:py-8">
         {/* Show DNAParticles on desktop, DNABackground on mobile */}
         <div className="hidden md:block w-full h-full absolute top-0 left-0 z-0">
           <DNAParticles />
@@ -38,15 +38,15 @@ export default function Home() {
         </div>
       </section>
       {/* System Statement + Features in one screen */}
-      <section className="w-full bg-black flex flex-col justify-center items-center min-h-screen h-screen px-4 py-4 md:py-10">
+      <section className="w-full bg-black flex flex-col justify-center items-center px-4 py-6 md:py-10">
         <div className="flex flex-col w-full max-w-6xl justify-center items-center flex-grow">
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-fuchsia-400 via-pink-400 to-purple-400 bg-clip-text text-transparent mb-2 md:mb-4 drop-shadow-lg text-center leading-[1.15] pb-2" style={{letterSpacing: '-0.01em'}}>
             The Arc doesn’t give you a plan. It gives you a system.
           </h2>
-          <p className="text-lg md:text-2xl lg:text-3xl font-semibold max-w-3xl text-white/80 text-center mb-14 md:mb-20">
+          <p className="text-lg md:text-2xl lg:text-3xl font-semibold max-w-3xl text-white/80 text-center mb-6 md:mb-20">
             One that understands your biology, adapts with your life, and helps you make smarter health decisions month after month.
           </p>
-          <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-20 items-stretch">
+          <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-20 items-stretch">
             {/* 1 */}
             <div className="relative flex flex-col items-center text-center h-full justify-between">
               <span className="absolute left-1/2 -translate-x-1/2 top-16 md:top-24 pointer-events-none select-none" style={{zIndex: 0}}>
@@ -249,7 +249,7 @@ function ArcFeatures() {
         {features.map((f, i) => (
           <div
             key={i}
-            className={`relative flex flex-col items-start p-4 rounded-2xl shadow-md border-2 text-left min-h-[180px] bg-black/80 transition-all duration-300 cursor-pointer font-montserrat
+            className={`relative flex flex-col items-center md:items-start p-4 rounded-2xl shadow-md border-2 text-center md:text-left min-h-[180px] bg-black/80 transition-all duration-300 cursor-pointer font-montserrat
               ${active === i ? 'scale-105 z-10 bg-gradient-to-br from-fuchsia-700 via-fuchsia-600 to-purple-600 border-fuchsia-400 text-white shadow-2xl ring-2 ring-fuchsia-400/40' : 'border-white/10 text-white/90 hover:scale-105 hover:z-10 hover:border-fuchsia-400 hover:bg-black/60 hover:shadow-xl'}`}
             onMouseEnter={() => setActive(i)}
             onFocus={() => setActive(i)}
@@ -267,7 +267,7 @@ function ArcFeatures() {
       {/* Mobile: horizontal scroll */}
       <div className="md:hidden flex flex-col gap-4 w-full px-2">
         {features.map((f, i) => (
-          <div key={i} className={`relative flex flex-col items-start p-4 rounded-2xl shadow-md border-2 text-left min-h-[180px] bg-black/80 transition-all duration-300 cursor-pointer font-montserrat
+          <div key={i} className={`relative flex flex-col items-center p-4 rounded-2xl shadow-md border-2 text-center min-h-[180px] bg-black/80 transition-all duration-300 cursor-pointer font-montserrat
             ${active === i ? 'scale-105 z-10 bg-gradient-to-br from-fuchsia-700 via-fuchsia-600 to-purple-600 border-fuchsia-400 text-white shadow-2xl ring-2 ring-fuchsia-400/40' : 'border-white/10 text-white/90 hover:scale-105 hover:z-10 hover:border-fuchsia-400 hover:bg-black/60 hover:shadow-xl'}`}
             onMouseEnter={() => setActive(i)}
             onFocus={() => setActive(i)}
