@@ -4,7 +4,7 @@ import "./globals.css";
 import Footer from "../components/Footer";
 import HeroWithOverlay from "../components/HeroWithOverlay";
 import DNABackground from "../components/DNABackground";
-import { usePathname } from "next/navigation";
+import MainLayoutClient from "../components/MainLayoutClient";
 import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
@@ -23,17 +23,13 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
-  // Add bottom padding to main content only on main/hero page
-  const pathname = typeof window !== "undefined" ? window.location.pathname : "";
-  const isOverlay = ["/about", "/contact", "/privacy-policy", "/terms"].includes(pathname);
   return (
     <html lang="en">
       <body className={"font-montserrat antialiased bg-black min-h-screen flex flex-col"}>
         <DNABackground />
-        <main className={`flex-1 flex flex-col relative z-10 ${!isOverlay ? 'pb-32' : ''}`}>
-          <HeroWithOverlay />
+        <MainLayoutClient>
           {children}
-        </main>
+        </MainLayoutClient>
         <Footer />
         <Analytics />
       </body>

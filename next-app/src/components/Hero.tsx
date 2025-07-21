@@ -8,9 +8,8 @@ export default function Hero() {
       <div className="sticky md:fixed top-0 left-0 z-30 w-full pointer-events-none bg-black/80 md:bg-transparent" style={{WebkitBackdropFilter: 'blur(2px)'}}>
         <div className="flex flex-row justify-between items-start w-full px-4 md:px-12 pt-[5vh] pointer-events-auto">
           <div className="text-3xl md:text-4xl font-bold tracking-tight text-white select-none mt-0 md:mt-0">TheArc</div>
-          <nav className="flex flex-col space-y-2 text-base md:text-lg font-normal items-end mt-0 md:mt-0 ml-auto">
-            <Link href="/about" className="hover:text-fuchsia-400 transition-colors">About</Link>
-            <Link href="/contact" className="hover:text-fuchsia-400 transition-colors">Contact</Link>
+          <nav className="flex space-x-8 text-base font-light">
+            <Link href="/contact" className="border border-fuchsia-400 text-fuchsia-200 bg-transparent hover:bg-fuchsia-900/10 hover:text-fuchsia-300 hover:ring-2 hover:ring-fuchsia-400/40 backdrop-blur-sm transition-all font-semibold text-base md:text-lg px-4 py-1.5 rounded-full tracking-wide">Apply to Join</Link>
           </nav>
         </div>
       </div>

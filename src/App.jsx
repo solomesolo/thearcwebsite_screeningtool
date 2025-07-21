@@ -32,6 +32,15 @@ function Hero() {
           <span className="ml-3 text-2xl">&rarr;</span>
         </Link>
       </div>
+      {/* New Section: The Arc System Statement */}
+      <section className="flex flex-col items-center justify-center text-center mt-16 mb-4 px-4">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-fuchsia-400 via-pink-400 to-purple-400 bg-clip-text text-transparent mb-4 drop-shadow-lg" style={{letterSpacing: '-0.01em'}}>
+          The Arc doesn’t give you a plan. It gives you a system.
+        </h2>
+        <p className="text-lg md:text-xl max-w-2xl text-white/80 font-medium">
+          One that understands your biology, adapts with your life, and helps you make smarter health decisions month after month.
+        </p>
+      </section>
     </div>
   );
 }
