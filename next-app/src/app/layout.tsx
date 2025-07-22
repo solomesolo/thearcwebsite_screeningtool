@@ -7,6 +7,7 @@ import DNABackground from "../components/DNABackground";
 import MainLayoutClient from "../components/MainLayoutClient";
 import { Analytics } from "@vercel/analytics/next";
 import { Montserrat } from "next/font/google";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +33,20 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-2Z54G93PVP"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-2Z54G93PVP');
+          `}
+        </Script>
+      </head>
       <body className={`${montserrat.variable} font-montserrat antialiased bg-black min-h-screen flex flex-col`}>
         <MainLayoutClient>
           {children}
