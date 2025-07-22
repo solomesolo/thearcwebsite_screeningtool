@@ -81,6 +81,7 @@ export default function Home() {
       <ArcPricing />
       <BeyondProgramSection />
       <SignUpNowSection />
+      <NowExploringBlock />
     </div>
   );
 }
@@ -624,5 +625,85 @@ function BuiltForSection() {
         }
       `}</style>
     </section>
+  );
+}
+
+function getRandomInt(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getCETDate() {
+  // CET is UTC+1 or UTC+2 (with DST). We'll use UTC+2 for summer, UTC+1 for winter.
+  const now = new Date();
+  // Simple DST check: if between last Sunday in March and last Sunday in October, use UTC+2
+  const year = now.getUTCFullYear();
+  const lastMarch = new Date(Date.UTC(year, 2, 31));
+  lastMarch.setUTCDate(31 - (lastMarch.getUTCDay() || 7) + 1); // last Sunday in March
+  const lastOct = new Date(Date.UTC(year, 9, 31));
+  lastOct.setUTCDate(31 - (lastOct.getUTCDay() || 7) + 1); // last Sunday in October
+  let offset = 1; // UTC+1
+  if (now >= lastMarch && now < lastOct) offset = 2; // UTC+2
+  return new Date(now.getTime() + offset * 60 * 60 * 1000);
+}
+
+function useSimulatedExplorers() {
+  const [count, setCount] = useState(() => {
+    const hour = getCETDate().getHours();
+    return hour >= 8 && hour < 23 ? getRandomInt(18, 43) : getRandomInt(8, 17);
+  });
+  const [fade, setFade] = useState(false);
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+    let lastSpikeHour = getCETDate().getHours();
+    function updateCount() {
+      const now = getCETDate();
+      const hour = now.getHours();
+      let min = hour >= 8 && hour < 23 ? 18 : 8;
+      let max = hour >= 8 && hour < 23 ? 43 : 17;
+      // 10% chance per hour to spike
+      if (Math.random() < 0.1 && hour !== lastSpikeHour) {
+        setFade(true);
+        setTimeout(() => {
+          setCount(getRandomInt(50, 55));
+          setFade(false);
+        }, 200);
+        lastSpikeHour = hour;
+      } else {
+        setFade(true);
+        setTimeout(() => {
+          setCount(getRandomInt(min, max));
+          setFade(false);
+        }, 200);
+      }
+      const next = getRandomInt(20000, 45000); // 20–45s
+      timeout = setTimeout(updateCount, next);
+    }
+    timeout = setTimeout(updateCount, getRandomInt(20000, 45000));
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, []);
+  return { count, fade };
+}
+
+function NowExploringBlock() {
+  const { count, fade } = useSimulatedExplorers();
+  return (
+    <div className="w-full flex justify-center items-center mt-10 mb-4">
+      <div className={`flex items-center gap-3 px-6 py-3 rounded-2xl bg-black/60 border border-white/10 shadow-sm text-sm md:text-base text-white/70 font-montserrat transition-all duration-500 ${fade ? 'opacity-0' : 'opacity-100'}`}
+        style={{minWidth: 260, maxWidth: 400, textAlign: 'center'}}>
+        <span className="inline-block w-3 h-3 rounded-full mr-2 animate-pulse-green" style={{background: '#6ee7b7'}}></span>
+        <span>{count} people are currently exploring The Arc</span>
+      </div>
+      <style jsx global>{`
+        @keyframes pulse-green {
+          0%, 100% { box-shadow: 0 0 0 0 #6ee7b7aa, 0 0 0 0 #6ee7b7; opacity: 1; }
+          50% { box-shadow: 0 0 0 6px #6ee7b733, 0 0 0 12px #6ee7b711; opacity: 0.85; }
+        }
+        .animate-pulse-green {
+          animation: pulse-green 1.6s cubic-bezier(0.4,0,0.2,1) infinite;
+        }
+      `}</style>
+    </div>
   );
 }
