@@ -24,6 +24,10 @@ body {
   color: var(--foreground);
 }
 
+body, body * {
+  font-family: var(--font-montserrat), ui-sans-serif, system-ui !important;
+}
+
 /* Custom scrollbar for overlays */
 .custom-scrollbar::-webkit-scrollbar {
   width: 10px;
