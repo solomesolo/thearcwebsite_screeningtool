@@ -658,8 +658,8 @@ function useSimulatedExplorers() {
     function updateCount() {
       const now = getCETDate();
       const hour = now.getHours();
-      let min = hour >= 8 && hour < 23 ? 18 : 8;
-      let max = hour >= 8 && hour < 23 ? 43 : 17;
+      const min = hour >= 8 && hour < 23 ? 18 : 8;
+      const max = hour >= 8 && hour < 23 ? 43 : 17;
       // 10% chance per hour to spike
       if (Math.random() < 0.1 && hour !== lastSpikeHour) {
         setFade(true);
