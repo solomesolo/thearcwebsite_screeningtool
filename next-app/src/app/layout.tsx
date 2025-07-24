@@ -34,9 +34,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <head>
+        {/* Google tag (gtag.js) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-2Z54G93PVP"
           strategy="afterInteractive"
+          async
         />
         <Script id="gtag-init" strategy="afterInteractive">
           {`
