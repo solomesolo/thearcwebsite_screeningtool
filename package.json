@@ -1,25 +1,41 @@
 {
-  "name": "thearc-frontend",
+  "name": "thearc-website-screening-tool",
   "version": "1.0.0",
-  "private": true,
+  "description": "TheArc website with integrated Right Screening Finder tool",
+  "main": "index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "concurrently \"npm run dev:arc\" \"npm run dev:screening\" \"npm run dev:backend\"",
+    "dev:arc": "cd next-app && npm run dev",
+    "dev:screening": "cd next-app/website-extension-backup-20250918-104005/questionnaire-extension/public && npx http-server . -p 8085",
+    "dev:backend": "cd next-app/website-extension-backup-20250918-104005/questionnaire-extension/backend && npm start",
+    "install:all": "npm install && cd next-app && npm install && cd website-extension-backup-20250918-104005/questionnaire-extension/backend && npm install",
+    "build": "cd next-app && npm run build",
+    "start": "concurrently \"npm run start:arc\" \"npm run start:screening\" \"npm run start:backend\"",
+    "start:arc": "cd next-app && npm start",
+    "start:screening": "cd next-app/website-extension-backup-20250918-104005/questionnaire-extension/public && npx http-server . -p 8085",
+    "start:backend": "cd next-app/website-extension-backup-20250918-104005/questionnaire-extension/backend && npm start"
   },
-  "dependencies": {
-    "@notionhq/client": "^4.0.1",
-    "@vercel/analytics": "^1.5.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.30.1"
-  },
+  "keywords": [
+    "health",
+    "screening",
+    "questionnaire",
+    "thearc",
+    "longevity",
+    "medical",
+    "assessment"
+  ],
+  "author": "TheArc Team",
+  "license": "MIT",
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.11",
-    "@vitejs/plugin-react": "^4.0.0",
-    "autoprefixer": "^10.4.21",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^3.4.17",
-    "vite": "^4.0.0"
-  }
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/solomesolo/thearcwebsite_screeningtool.git"
+  },
+  "homepage": "https://github.com/solomesolo/thearcwebsite_screeningtool#readme"
 }
