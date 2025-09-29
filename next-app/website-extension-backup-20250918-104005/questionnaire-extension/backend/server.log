@@ -1,0 +1,175 @@
+Right Screening Finder API running on port 3001
+Health check: http://localhost:3001/health
+API endpoint: http://localhost:3001/api/analyze-health
+📧 API Request received - body: {
+  "responses": {
+    "age": "26_35",
+    "sex": "female"
+  },
+  "userEmail": "thearc@thearcme.com"
+}
+📧 Extracted userEmail: thearc@thearcme.com type: string
+📧 Email check - userEmail: thearc@thearcme.com type: string includes @: true
+📧 Sending personalized health screening results to: thearc@thearcme.com
+✅ Email sent successfully to: thearc@thearcme.com
+📧 SendGrid response: [
+  Response {
+    statusCode: 202,
+    body: '',
+    headers: Object [AxiosHeaders] {
+      server: 'nginx',
+      date: 'Mon, 29 Sep 2025 10:03:28 GMT',
+      'content-length': '0',
+      connection: 'keep-alive',
+      'x-message-id': '7ezWSVT2R4WCaYjsM9k8Ng',
+      'access-control-allow-origin': 'https://sendgrid.api-docs.io',
+      'access-control-allow-methods': 'POST',
+      'access-control-allow-headers': 'Authorization, Content-Type, On-behalf-of, x-sg-elas-acl',
+      'access-control-max-age': '600',
+      'x-no-cors-reason': 'https://sendgrid.com/docs/Classroom/Basics/API/cors.html',
+      'strict-transport-security': 'max-age=31536000; includeSubDomains',
+      'content-security-policy': "frame-ancestors 'none'",
+      'cache-control': 'no-cache',
+      'x-content-type-options': 'no-sniff',
+      'referrer-policy': 'strict-origin-when-cross-origin'
+    }
+  },
+  ''
+]
+Notion not configured, saving email locally instead
+Notion not configured, saving email locally instead
+📧 API Request received - body: {
+  "responses": {
+    "age": "26_35",
+    "sex": "female"
+  },
+  "userEmail": "thearc@thearcme.com"
+}
+📧 Extracted userEmail: thearc@thearcme.com type: string
+📧 Email check - userEmail: thearc@thearcme.com type: string includes @: true
+📧 Sending personalized health screening results to: thearc@thearcme.com
+✅ Email sent successfully to: thearc@thearcme.com
+📧 SendGrid response: [
+  Response {
+    statusCode: 202,
+    body: '',
+    headers: Object [AxiosHeaders] {
+      server: 'nginx',
+      date: 'Mon, 29 Sep 2025 10:06:43 GMT',
+      'content-length': '0',
+      connection: 'keep-alive',
+      'x-message-id': 'Gy8F9mMwTwukbHmKFZtv-w',
+      'access-control-allow-origin': 'https://sendgrid.api-docs.io',
+      'access-control-allow-methods': 'POST',
+      'access-control-allow-headers': 'Authorization, Content-Type, On-behalf-of, x-sg-elas-acl',
+      'access-control-max-age': '600',
+      'x-no-cors-reason': 'https://sendgrid.com/docs/Classroom/Basics/API/cors.html',
+      'strict-transport-security': 'max-age=31536000; includeSubDomains',
+      'content-security-policy': "frame-ancestors 'none'",
+      'cache-control': 'no-cache',
+      'x-content-type-options': 'no-sniff',
+      'referrer-policy': 'strict-origin-when-cross-origin'
+    }
+  },
+  ''
+]
+Notion not configured, saving email locally instead
+📧 API Request received - body: {
+  "responses": {
+    "medical_diagnoses": [
+      "hypertension"
+    ],
+    "family_history": [
+      "diabetes"
+    ],
+    "height": "176",
+    "age": "36_45",
+    "sex": "female",
+    "medications": "no",
+    "exercise_type": [
+      "strength"
+    ],
+    "menstrual_cycles": "absent_periods",
+    "muscle_strength": "significantly",
+    "mood_changes": "yes"
+  },
+  "userEmail": "annasolohere@gmail.com"
+}
+📧 Extracted userEmail: annasolohere@gmail.com type: string
+📧 Email check - userEmail: annasolohere@gmail.com type: string includes @: true
+📧 Sending personalized health screening results to: annasolohere@gmail.com
+✅ Email sent successfully to: annasolohere@gmail.com
+📧 SendGrid response: [
+  Response {
+    statusCode: 202,
+    body: '',
+    headers: Object [AxiosHeaders] {
+      server: 'nginx',
+      date: 'Mon, 29 Sep 2025 10:08:47 GMT',
+      'content-length': '0',
+      connection: 'keep-alive',
+      'x-message-id': 'aJ2S0rfDQ4y8vFwTasqxKg',
+      'access-control-allow-origin': 'https://sendgrid.api-docs.io',
+      'access-control-allow-methods': 'POST',
+      'access-control-allow-headers': 'Authorization, Content-Type, On-behalf-of, x-sg-elas-acl',
+      'access-control-max-age': '600',
+      'x-no-cors-reason': 'https://sendgrid.com/docs/Classroom/Basics/API/cors.html',
+      'strict-transport-security': 'max-age=31536000; includeSubDomains',
+      'content-security-policy': "frame-ancestors 'none'",
+      'cache-control': 'no-cache',
+      'x-content-type-options': 'no-sniff',
+      'referrer-policy': 'strict-origin-when-cross-origin'
+    }
+  },
+  ''
+]
+Notion not configured, saving email locally instead
+📧 API Request received - body: {
+  "responses": {
+    "medical_diagnoses": [
+      "hypertension"
+    ],
+    "family_history": [
+      "diabetes"
+    ],
+    "height": "176",
+    "age": "36_45",
+    "sex": "female",
+    "medications": "no",
+    "exercise_type": [
+      "strength"
+    ],
+    "menstrual_cycles": "absent_periods",
+    "muscle_strength": "significantly",
+    "mood_changes": "yes"
+  },
+  "userEmail": "annasolohere@gmail.com"
+}
+📧 Extracted userEmail: annasolohere@gmail.com type: string
+📧 Email check - userEmail: annasolohere@gmail.com type: string includes @: true
+📧 Sending personalized health screening results to: annasolohere@gmail.com
+✅ Email sent successfully to: annasolohere@gmail.com
+📧 SendGrid response: [
+  Response {
+    statusCode: 202,
+    body: '',
+    headers: Object [AxiosHeaders] {
+      server: 'nginx',
+      date: 'Mon, 29 Sep 2025 10:21:52 GMT',
+      'content-length': '0',
+      connection: 'keep-alive',
+      'x-message-id': 'tD-YPkecQ9e6J1H7R8U4sg',
+      'access-control-allow-origin': 'https://sendgrid.api-docs.io',
+      'access-control-allow-methods': 'POST',
+      'access-control-allow-headers': 'Authorization, Content-Type, On-behalf-of, x-sg-elas-acl',
+      'access-control-max-age': '600',
+      'x-no-cors-reason': 'https://sendgrid.com/docs/Classroom/Basics/API/cors.html',
+      'strict-transport-security': 'max-age=31536000; includeSubDomains',
+      'content-security-policy': "frame-ancestors 'none'",
+      'cache-control': 'no-cache',
+      'x-content-type-options': 'no-sniff',
+      'referrer-policy': 'strict-origin-when-cross-origin'
+    }
+  },
+  ''
+]

@@ -21,6 +21,7 @@ export default function Home() {
         <div className="absolute top-[5vh] left-0 w-full flex items-center justify-between px-6 py-3 z-20">
           <div className="text-2xl font-bold tracking-tight text-white select-none font-montserrat">TheArc</div>
           <nav className="flex space-x-4 text-lg font-semibold">
+            <Link href="http://localhost:8085/" target="_blank" className="border border-blue-400 text-blue-200 bg-transparent hover:bg-blue-900/10 hover:text-blue-300 hover:ring-2 hover:ring-blue-400/40 backdrop-blur-sm transition-all font-semibold text-lg px-6 py-2 rounded-full tracking-wide font-montserrat">Screening Check</Link>
             <Link href="/contact" className="border border-fuchsia-400 text-fuchsia-200 bg-transparent hover:bg-fuchsia-900/10 hover:text-fuchsia-300 hover:ring-2 hover:ring-fuchsia-400/40 backdrop-blur-sm transition-all font-semibold text-lg px-6 py-2 rounded-full tracking-wide font-montserrat">Apply to Join</Link>
           </nav>
         </div>

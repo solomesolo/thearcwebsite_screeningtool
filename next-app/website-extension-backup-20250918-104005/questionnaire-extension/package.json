@@ -1,0 +1,33 @@
+{
+  "name": "questionnaire-extension",
+  "version": "1.0.0",
+  "description": "A web extension that implements a questionnaire with a modern design and layout.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.4",
+    "@babel/preset-env": "^7.28.3",
+    "@babel/preset-react": "^7.27.1",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.5.1",
+    "html-webpack-plugin": "^5.5.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^5.2.2"
+  },
+  "keywords": [
+    "web extension",
+    "questionnaire",
+    "react"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

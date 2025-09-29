@@ -1,0 +1,55 @@
+/******************************************************************************* 
+ * This file contains responsive design styles for the questionnaire extension. 
+ *******************************************************************************/
+
+@media (max-width: 1200px) {
+    /* Styles for large screens */
+    .container {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    /* Styles for medium screens */
+    .container {
+        padding: 15px;
+    }
+
+    .question-card {
+        flex-direction: column;
+    }
+
+    .progress-bar {
+        height: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Styles for small screens */
+    .container {
+        padding: 10px;
+    }
+
+    .question-card {
+        margin: 10px 0;
+    }
+
+    .button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Styles for extra small screens */
+    .container {
+        padding: 5px;
+    }
+
+    .question-card {
+        font-size: 14px;
+    }
+
+    .progress-bar {
+        height: 8px;
+    }
+}

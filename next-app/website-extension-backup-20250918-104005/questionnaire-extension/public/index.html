@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Right Screening Finder - Personalized Health Screening</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Version: 2025-01-29-15:30 -->
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            
+            --bg-primary: #0f0f23;
+            --bg-secondary: #1a1a2e;
+            --bg-tertiary: #16213e;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --bg-glass: rgba(255, 255, 255, 0.08);
+            
+            --text-primary: #ffffff;
+            --text-secondary: #e2e8f0;
+            --text-muted: #94a3b8;
+            --text-accent: #a78bfa;
+            
+            --border: rgba(255, 255, 255, 0.1);
+            --border-light: rgba(255, 255, 255, 0.05);
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.3);
+            
+            --radius-sm: 0.375rem;
+            --radius: 0.5rem;
+            --radius-md: 0.75rem;
+            --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
+            --radius-2xl: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-size: 16px;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, var(--bg-primary), var(--bg-secondary), var(--bg-tertiary));
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Orbs */
+        .floating-orbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.1;
+            }
+            90% {
+                opacity: 0.1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header - TheArc Style */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: 60px;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            height: 100%;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .header nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .header nav a {
+            border: 1px solid #f472b6;
+            color: #f0abfc;
+            background: transparent;
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .header nav a:hover {
+            background: rgba(244, 114, 182, 0.1);
+            color: #f0abfc;
+            box-shadow: 0 0 0 2px rgba(244, 114, 182, 0.4);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding-top: 60px;
+            padding-bottom: 8rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        /* Hero Section - Elegant Design */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .hero-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff, #e5e7eb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: #d1d5db;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+        }
+
+        .hero-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.4);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--text-accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: var(--radius-xl);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.125rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.4);
+        }
+
+        .cta-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Trust Indicators */
+        .trust-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .trust-icon {
+            width: 20px;
+            height: 20px;
+            background: var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: white;
+        }
+
+        /* Interactive Stats Section - Elegant Design */
+        .stats-section {
+            padding: 4rem 0;
+            background: transparent;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .stats-facts {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .fact-item {
+            background: transparent;
+            backdrop-filter: none;
+            border: none;
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
+            text-align: left;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+
+        .fact-item:hover {
+            transform: translateX(10px);
+        }
+
+        .fact-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .fact-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        .stats-content h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stats-content p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .interactive-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .stat-item {
+            background: transparent;
+            backdrop-filter: none;
+            border: none;
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* Interactive Process Section - Redesigned with Scroll Animations */
+        .process-section {
+            padding: 8rem 0;
+            background: transparent;
+        }
+
+        .process-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .process-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .process-step.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+            margin-right: 2rem;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+        }
+
+        .step-content {
+            flex: 1;
+            padding-top: 0.5rem;
+        }
+
+        .step-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff, #e5e7eb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .step-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        .step-highlight {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Simple Call-to-Action Section */
+        .cta-section {
+            padding: 3rem 0;
+            background: transparent;
+        }
+
+        .cta-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .cta-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.4;
+            background: linear-gradient(135deg, #ffffff, #e5e7eb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cta-highlight {
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        /* Categories Section - Completely Rewritten */
+        .categories-section {
+            padding: 8rem 0;
+            background: transparent;
+        }
+
+        .categories-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .category-item {
+            text-align: center;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .category-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .category-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .category-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .feature-tag {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-lg);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .category-count {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Interactive Testimonials - Elegant Design */
+        .testimonials-section {
+            padding: 8rem 0;
+        }
+
+        .testimonials-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-2xl);
+            padding: 2.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.2;
+            font-family: serif;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .testimonial-text {
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .author-info {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Final CTA - Elegant Design */
+        .final-cta {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-2xl);
+            padding: 4rem 3rem;
+            text-align: center;
+            margin: 6rem auto;
+            max-width: 800px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .final-cta h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .final-cta p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        .footer {
+            width: 100%;
+            padding: 1rem 2rem 1.5rem 2rem;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            color: #9ca3af;
+            font-size: 0.75rem;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 50;
+        }
+
+        .footer-content {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-link {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #f472b6;
+        }
+
+        .footer-social {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .social-link {
+            color: #9ca3af;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: #f472b6;
+        }
+
+        .footer-copyright {
+            text-align: center;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .footer {
+                flex-direction: row;
+                padding: 1.5rem 2rem;
+            }
+
+            .footer-content {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .footer-links {
+                margin-bottom: 0;
+            }
+
+            .footer-social {
+                margin-bottom: 0;
+            }
+
+            .footer-copyright {
+                text-align: center;
+                width: auto;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .interactive-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-content {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .hero-section {
+                padding: 4rem 0;
+            }
+            
+            .header {
+                height: 50px;
+            }
+            
+            .main-content {
+                padding-top: 50px;
+            }
+            
+            .header-content {
+                padding: 0 1rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-description {
+                font-size: 1.1rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .process-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .trust-indicators {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .stats-section,
+            .process-section,
+            .categories-section,
+            .testimonials-section {
+                padding: 6rem 0;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.6s ease;
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.6s ease;
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+    <div class="floating-orbs" id="floatingOrbs"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">TheArc</div>
+            <nav class="flex space-x-4 text-lg font-semibold">
+                <a href="consent.html" class="border border-fuchsia-400 text-fuchsia-200 bg-transparent hover:bg-fuchsia-900/10 hover:text-fuchsia-300 hover:ring-2 hover:ring-fuchsia-400/40 backdrop-blur-sm transition-all font-semibold text-lg px-6 py-2 rounded-full tracking-wide font-montserrat">Start Free Check</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero -->
+        <section class="hero-section">
+            <div class="hero-wrapper">
+                <h1 class="hero-title">Know Exactly Which Screenings Protect Your Future Health</h1>
+                <p class="hero-description">Based on the latest medical guidelines, the <strong>Right Screening Finder</strong> shows you which tests you may be missing — before small issues become big problems</p>
+                <a href="consent.html" class="hero-button">
+                    Start Your Free Screening Check
+                    <span>→</span>
+                </a>
+                <div class="trust-indicators">
+                    <div class="trust-item">
+                        <div class="trust-icon">✓</div>
+                        <span>Evidence-based medical standards</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon">✓</div>
+                        <span>GDPR compliant</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon">✓</div>
+                        <span>Used by thousands</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Simple Call-to-Action Section -->
+        <section class="cta-section">
+            <div class="cta-container">
+                <p class="cta-text fade-in">
+                    Stop wasting <span class="cta-highlight">thousands</span> on tests you don't need—<span class="cta-highlight">targeted screenings</span> catch real problems before they become emergencies.
+                </p>
+            </div>
+        </section>
+
+        <!-- Interactive Stats Section -->
+        <section class="stats-section">
+            <div class="stats-container">
+                <div class="stats-facts fade-in">
+                    <div class="fact-item scale-in">
+                        <div class="fact-number">1 in 3</div>
+                        <div class="fact-text">people with abnormal blood work have an underlying disease requiring treatment—most had no symptoms at the time of the test.</div>
+                    </div>
+                    <div class="fact-item scale-in">
+                        <div class="fact-number">1,000</div>
+                        <div class="fact-text">lives (per million) can be saved for every 1% increase in population-wide blood screening, especially as undiagnosed diabetes, kidney failure, and heart disease rates remain high.</div>
+                    </div>
+                    <div class="fact-item scale-in">
+                        <div class="fact-number">60%</div>
+                        <div class="fact-text">reduction in advanced cancer at diagnosis when new blood-based tests are combined with traditional screening.</div>
+                    </div>
+                    <div class="fact-item scale-in">
+                        <div class="fact-number">90%</div>
+                        <div class="fact-text">of early-stage pancreatic cancers in a recent trial were detected using a simple urine test.</div>
+                    </div>
+                </div>
+                <div class="stats-content fade-in">
+                    <h2>Most People Skip the Tests That Matter Most</h2>
+                    <p>Early detection saves lives, but most people don't know which screenings they need or when to get them.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Process Section -->
+        <section class="process-section">
+            <div class="stats-content fade-in" style="text-align: center; margin-bottom: 4rem;">
+                <h2>How It Works</h2>
+                <p>Simple, evidence-based approach to personalized health screening</p>
+            </div>
+            <div class="process-container">
+                <div class="process-step" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Tell us about you — 5 minutes</h3>
+                        <p class="step-description">
+                            Quick, targeted questions about your history, lifestyle, symptoms and previous tests.<br>
+                            This isn't a survey - it's the raw material for a screening plan that fits only you. Enter the facts once and get a map you can act on. <span class="step-highlight">We keep your data private and GDPR-safe.</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="process-step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Clinical evidence, not guesswork</h3>
+                        <p class="step-description">
+                            Your answers are checked against current medical guidelines.<br>
+                            We filter noise and surface real risk: the urgent gaps, the tests you've missed, and the ones that will actually change decisions. <span class="step-highlight">Clear reasons - not generic checklists.</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="process-step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Personalised screening plan you can use today</h3>
+                        <p class="step-description">
+                            Receive a prioritized screening roadmap: urgent tests first, due-soon next, optional later.<br>
+                            A shareable report you can give your doctor, book a test from, or use to stop wasting money on useless checks. <span class="step-highlight">Actionable. Practical. Immediate.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section - Completely Rewritten -->
+        <section class="categories-section">
+            <div class="stats-content fade-in" style="text-align: center; margin-bottom: 2rem;">
+                <h2>Comprehensive Health Coverage</h2>
+                <p>We analyze biomarkers across all major health domains to give you a complete picture</p>
+            </div>
+            <div class="categories-grid">
+                <div class="category-item scale-in">
+                    <div class="category-icon">❤️</div>
+                    <h3 class="category-title">Cardiovascular Health</h3>
+                    <p class="category-description">Heart and vessel protection through advanced lipid analysis and inflammation markers.</p>
+                    <div class="category-features">
+                        <span class="feature-tag">Lipid Panel</span>
+                        <span class="feature-tag">ApoB</span>
+                        <span class="feature-tag">hs-CRP</span>
+                    </div>
+                    <p class="category-count">~8 biomarkers analyzed</p>
+                </div>
+                <div class="category-item scale-in">
+                    <div class="category-icon">🍯</div>
+                    <h3 class="category-title">Metabolic Health</h3>
+                    <p class="category-description">Blood sugar control, insulin sensitivity, and diabetes risk assessment.</p>
+                    <div class="category-features">
+                        <span class="feature-tag">HbA1c</span>
+                        <span class="feature-tag">Fasting Glucose</span>
+                        <span class="feature-tag">HOMA-IR</span>
+                    </div>
+                    <p class="category-count">~7 biomarkers analyzed</p>
+                </div>
+                <div class="category-item scale-in">
+                    <div class="category-icon">⚡</div>
+                    <h3 class="category-title">Hormonal Health</h3>
+                    <p class="category-description">Energy, stress, thyroid, and reproductive hormone balance assessment.</p>
+                    <div class="category-features">
+                        <span class="feature-tag">TSH</span>
+                        <span class="feature-tag">Cortisol</span>
+                        <span class="feature-tag">Testosterone</span>
+                    </div>
+                    <p class="category-count">~6 biomarkers analyzed</p>
+                </div>
+                <div class="category-item scale-in">
+                    <div class="category-icon">🥬</div>
+                    <h3 class="category-title">Nutritional Status</h3>
+                    <p class="category-description">Vitamin and mineral deficiencies that impact your daily energy and health.</p>
+                    <div class="category-features">
+                        <span class="feature-tag">Vitamin D</span>
+                        <span class="feature-tag">B12</span>
+                        <span class="feature-tag">Iron Panel</span>
+                    </div>
+                    <p class="category-count">~10 biomarkers analyzed</p>
+                </div>
+                <div class="category-item scale-in">
+                    <div class="category-icon">⏰</div>
+                    <h3 class="category-title">Longevity Biomarkers</h3>
+                    <p class="category-description">Biological aging markers and inflammation patterns that affect your lifespan.</p>
+                    <div class="category-features">
+                        <span class="feature-tag">Epigenetic Age</span>
+                        <span class="feature-tag">Telomere Length</span>
+                        <span class="feature-tag">Inflammation</span>
+                    </div>
+                    <p class="category-count">~6 biomarkers analyzed</p>
+                </div>
+                <div class="category-item scale-in">
+                    <div class="category-icon">🦠</div>
+                    <h3 class="category-title">Gut Health</h3>
+                    <p class="category-description">Microbiome diversity and digestive health markers for optimal gut function.</p>
+                    <div class="category-features">
+                        <span class="feature-tag">Microbiome</span>
+                        <span class="feature-tag">Calprotectin</span>
+                        <span class="feature-tag">SCFAs</span>
+                    </div>
+                    <p class="category-count">~8 biomarkers analyzed</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Testimonials -->
+        <section class="testimonials-section">
+            <div class="stats-content fade-in" style="text-align: center; margin-bottom: 2rem;">
+                <h2>What People Say</h2>
+                <p>Real feedback from users who discovered their missing screenings</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card slide-in-left">
+                    <p class="testimonial-text">"Finally, a screening guide that cuts through the noise and shows me what actually matters for my health."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">M</div>
+                        <div class="author-info">Marta, 42</div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <p class="testimonial-text">"I've done dozens of health checks, but this was the first time I understood what really matters for me specifically."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">D</div>
+                        <div class="author-info">Daniel, 51</div>
+                    </div>
+                </div>
+                <div class="testimonial-card slide-in-right">
+                    <p class="testimonial-text">"Simple, clear, and eye-opening. It showed me which tests I was overdue for in just minutes."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">J</div>
+                        <div class="author-info">Julia, 37</div>
+                    </div>
+                </div>
+                <div class="testimonial-card slide-in-left">
+                    <p class="testimonial-text">"Finally, a way to see which screenings actually protect my future health, not just generic advice."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">M</div>
+                        <div class="author-info">Markus, 45</div>
+                    </div>
+                </div>
+                <div class="testimonial-card fade-in">
+                    <p class="testimonial-text">"It gave me clarity — no more guessing which blood tests I should repeat or when."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">E</div>
+                        <div class="author-info">Elena, 41</div>
+                    </div>
+                </div>
+                <div class="testimonial-card slide-in-right">
+                    <p class="testimonial-text">"I thought I was on top of my health. This showed me I was missing key screenings that could save my life."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">P</div>
+                        <div class="author-info">Peter, 56</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section class="section">
+            <div class="final-cta fade-in">
+                <h2>Your Health Doesn't Wait — Neither Should You</h2>
+                <p>Outdated screenings leave silent risks unchecked.</p>
+                <p>The sooner you know, the sooner you can act.</p>
+                <a href="consent.html" class="cta-button">Start Your Free Screening Check Now</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
+                <a href="/terms" class="footer-link">Terms and Conditions</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://www.instagram.com/thearc_me?igsh=MTc2NXc4dDdoemJxYg%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+                    <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="5" strokeWidth="2"/><circle cx="12" cy="12" r="5" strokeWidth="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
+                </a>
+                <a href="https://www.tiktok.com/@thearc_me?_t=ZN-8xyNGVEFHqo&_r=1" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="TikTok">
+                    <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M16.5 3v8.25a4.75 4.75 0 11-4.75-4.75" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M16.5 3c.5 2 2.5 3.5 4 3.5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </a>
+            </div>
+            <div class="footer-copyright">© 2025. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        // Create floating orbs
+        function createFloatingOrbs() {
+            const orbsContainer = document.getElementById('floatingOrbs');
+            const orbCount = 15;
+
+            for (let i = 0; i < orbCount; i++) {
+                const orb = document.createElement('div');
+                orb.className = 'orb';
+                
+                // Random size between 20px and 80px
+                const size = Math.random() * 60 + 20;
+                orb.style.width = size + 'px';
+                orb.style.height = size + 'px';
+                
+                // Random horizontal position
+                orb.style.left = Math.random() * 100 + '%';
+                
+                // Random animation duration between 15s and 25s
+                const duration = Math.random() * 10 + 15;
+                orb.style.animationDuration = duration + 's';
+                
+                // Random delay
+                orb.style.animationDelay = Math.random() * 20 + 's';
+                
+                orbsContainer.appendChild(orb);
+            }
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in, .process-step').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            createFloatingOrbs();
+        });
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
