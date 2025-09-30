@@ -1,0 +1,26 @@
+plugins = []
+headers = []
+redirects = []
+
+[functions]
+
+[functions."*"]
+
+[build]
+publish = "/Users/solo/Desktop/TheArc_website/next-app/website-extension-backup-20250918-104005/questionnaire-extension/public"
+publishOrigin = "default"
+base = "/Users/solo/Desktop/TheArc_website/next-app/website-extension-backup-20250918-104005/questionnaire-extension/public"
+
+[build.environment]
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]
