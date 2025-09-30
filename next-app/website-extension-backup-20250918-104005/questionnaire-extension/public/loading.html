@@ -304,7 +304,7 @@
                 console.log('Making API call with answers:', answers);
                 document.getElementById('progressText').textContent = 'AI is analyzing your health data...';
                 
-                const response = await fetch('http://localhost:3001/api/analyze-health', {
+                const response = await fetch('https://backend-8p7kgqsn9-annas-projects-3d23b0f3.vercel.app/api/analyze-health', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -357,7 +357,7 @@
                 // Even if there's an error, try to get fallback data from API response
                 let fallbackResults;
                 try {
-                    const errorResponse = await fetch('http://localhost:3001/api/analyze-health', {
+                    const errorResponse = await fetch('https://backend-8p7kgqsn9-annas-projects-3d23b0f3.vercel.app/api/analyze-health', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

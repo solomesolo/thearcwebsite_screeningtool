@@ -863,7 +863,7 @@
                 console.log('📧 Generated HTML content length:', htmlContent.length);
                 console.log('📧 Generated text content length:', textContent.length);
                 
-                const emailResponse = await fetch('http://localhost:3001/api/send-email', {
+                const emailResponse = await fetch('https://backend-8p7kgqsn9-annas-projects-3d23b0f3.vercel.app/api/send-email', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
