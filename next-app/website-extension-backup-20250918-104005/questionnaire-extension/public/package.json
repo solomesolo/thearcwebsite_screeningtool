@@ -1,0 +1,11 @@
+{
+  "name": "thearc-screening-api",
+  "version": "1.0.0",
+  "description": "API functions for TheArc screening tool",
+  "main": "index.js",
+  "dependencies": {
+    "@notionhq/client": "^4.0.1",
+    "@sendgrid/mail": "^8.1.0",
+    "openai": "^4.0.0"
+  }
+}

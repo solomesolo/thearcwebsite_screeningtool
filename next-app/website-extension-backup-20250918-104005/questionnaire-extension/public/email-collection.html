@@ -371,7 +371,7 @@
                 
                 console.log('📧 Sending email with results to:', email);
                 
-                const emailResponse = await fetch('https://backend-8p7kgqsn9-annas-projects-3d23b0f3.vercel.app/api/send-email', {
+                const emailResponse = await fetch('/api/send-email', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -545,7 +545,7 @@
                 console.log('📧 Full data:', { email, timestamp: new Date().toISOString(), consent: true, source: 'questionnaire' });
                 
                 console.log('📧 Making API call to:', 'http://localhost:3001/api/save-email');
-                const saveResponse = await fetch('https://backend-8p7kgqsn9-annas-projects-3d23b0f3.vercel.app/api/save-email', {
+                const saveResponse = await fetch('/api/save-email', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -627,7 +627,6 @@
         });
     </script>
     
-    <!-- Mock API for testing without backend -->
-    <script src="mock-api.js"></script>
+    <!-- Real backend API integration -->
 </body>
 </html>
