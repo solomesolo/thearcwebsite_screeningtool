@@ -326,8 +326,8 @@
                 const results = await response.json();
                 console.log('API results:', results);
                 
-                // Always use the data field from successful API response
-                const healthData = results.data;
+                // Use the results field from successful API response
+                const healthData = results.results;
                 console.log('Health data to save:', healthData);
                 console.log('Number of categories:', healthData.categories ? healthData.categories.length : 'No categories');
                 
@@ -354,138 +354,10 @@
                 console.log('Error in processHealthData:', error);
                 console.log('Error details:', error.message);
                 
-                // Even if there's an error, try to get fallback data from API response
-                let fallbackResults;
-                try {
-                    const errorResponse = await fetch('/api/analyze-health', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ responses: answers })
-                    });
-                    const errorData = await errorResponse.json();
-                    if (errorData.fallbackData) {
-                        console.log('Using API fallback data with all categories');
-                        fallbackResults = errorData.fallbackData;
-                    } else {
-                        throw new Error('No fallback data from API');
-                    }
-                } catch (apiError) {
-                    console.log('API fallback failed, using minimal fallback');
-                    // Minimal fallback with all 6 categories
-                    fallbackResults = {
-                        assessment_summary: "Based on your health assessment, we have identified key areas for preventive screening. This personalized plan focuses on early detection and prevention to optimize your long-term health and longevity.",
-                        urgent_tests: [
-                            {
-                                name: "HbA1c (3-month average blood sugar)",
-                                explanation: "Essential for detecting early diabetes risk years before symptoms appear.",
-                                timeframe: "Schedule within 1–2 weeks",
-                                status: "RECOMMENDED"
-                            },
-                            {
-                                name: "Lipid Panel (cholesterol, LDL, HDL, triglycerides)",
-                                explanation: "Fundamental cardiovascular risk assessment for heart disease prevention.",
-                                timeframe: "Schedule within 2 weeks",
-                                status: "RECOMMENDED"
-                            },
-                            {
-                                name: "Thyroid Function (TSH, free T4, free T3)",
-                                explanation: "Important for metabolic health and energy regulation.",
-                                timeframe: "Schedule within 1 month",
-                                status: "RECOMMENDED"
-                            }
-                        ],
-                        categories: [
-                            {
-                                category_name: "Cardiovascular Health",
-                                category_description: "Essential tests for heart disease prevention and cardiovascular risk assessment.",
-                                tests: [
-                                    { name: "Lipid Panel", description: "Measures cholesterol levels and cardiovascular risk factors for heart disease prevention.", status: "MISSING" },
-                                    { name: "ApoB", description: "Advanced marker for cardiovascular disease risk assessment and heart attack prevention.", status: "MISSING" },
-                                    { name: "hs-CRP", description: "Inflammation marker linked to heart disease risk and cardiovascular health monitoring.", status: "MISSING" },
-                                    { name: "Homocysteine", description: "Cardiovascular risk factor and B-vitamin status indicator for heart health.", status: "MISSING" }
-                                ]
-                            },
-                            {
-                                category_name: "Metabolic Health",
-                                category_description: "Key biomarkers for diabetes prevention and metabolic syndrome detection.",
-                                tests: [
-                                    { name: "HbA1c", description: "3-month average blood sugar level for diabetes screening and metabolic health monitoring.", status: "MISSING" },
-                                    { name: "Fasting Glucose", description: "Current blood sugar level and diabetes risk indicator for metabolic assessment.", status: "MISSING" },
-                                    { name: "Fasting Insulin", description: "Insulin resistance marker and metabolic health indicator for diabetes prevention.", status: "MISSING" },
-                                    { name: "Liver Enzymes", description: "Liver function and metabolic health assessment for overall metabolic monitoring.", status: "MISSING" }
-                                ]
-                            },
-                            {
-                                category_name: "Hormonal Health",
-                                category_description: "Comprehensive hormone assessment for optimal endocrine function.",
-                                tests: [
-                                    { name: "Thyroid Function", description: "Essential for metabolism, energy, and overall health regulation and monitoring.", status: "MISSING" },
-                                    { name: "Testosterone (men)", description: "Male hormone levels affecting energy, muscle mass, and vitality for men's health.", status: "MISSING" },
-                                    { name: "Cortisol", description: "Stress hormone affecting energy, sleep, and immune function for stress management.", status: "MISSING" },
-                                    { name: "DHEA-S", description: "Anti-aging hormone and energy metabolism marker for longevity and vitality.", status: "MISSING" }
-                                ]
-                            },
-                            {
-                                category_name: "Nutritional Status",
-                                category_description: "Essential vitamins and minerals for optimal health and energy.",
-                                tests: [
-                                    { name: "Vitamin D", description: "Critical for immune function, bone health, and mood regulation for overall wellness.", status: "MISSING" },
-                                    { name: "Vitamin B12 & Folate", description: "Essential for energy production and neurological function for brain and energy health.", status: "MISSING" },
-                                    { name: "Ferritin (Iron)", description: "Iron storage levels affecting energy and oxygen transport for vitality and energy.", status: "MISSING" },
-                                    { name: "Magnesium & Zinc", description: "Essential minerals for muscle function and immune health for optimal body function.", status: "MISSING" }
-                                ]
-                            },
-                            {
-                                category_name: "Longevity Biomarkers",
-                                category_description: "Advanced markers for biological aging and longevity optimization.",
-                                tests: [
-                                    { name: "Biological Aging Marker", description: "Measures cellular aging and biological age vs chronological age for longevity tracking.", status: "MISSING" },
-                                    { name: "Omega-3 Index", description: "Essential fatty acid levels for heart and brain health for cognitive and cardiovascular wellness.", status: "MISSING" },
-                                    { name: "Genetic Health Screen", description: "Personalized genetic insights for disease prevention and personalized health optimization.", status: "MISSING" }
-                                ]
-                            },
-                            {
-                                category_name: "Gut Health",
-                                category_description: "Microbiome analysis for digestive health and immune function.",
-                                tests: [
-                                    { name: "Microbiome Test", description: "Comprehensive analysis of gut bacteria and digestive health for immune and digestive wellness.", status: "MISSING" },
-                                    { name: "Stool Analysis", description: "Digestive function and gut health assessment for digestive and immune system monitoring.", status: "MISSING" }
-                                ]
-                            }
-                        ],
-                        next_steps: [
-                            {
-                                timeframe: "URGENT (within 2 weeks)",
-                                actions: ["Schedule HbA1c test immediately", "Book Lipid Panel appointment", "Arrange Thyroid Function testing", "Consult with healthcare provider about results"]
-                            },
-                            {
-                                timeframe: "MEDIUM-TERM (within 1 month)",
-                                actions: ["Complete metabolic panel (Insulin, Liver enzymes)", "Schedule hormonal assessment", "Address nutritional deficiencies", "Begin targeted supplementation if needed"]
-                            },
-                            {
-                                timeframe: "OPTIONAL (within 3 months)",
-                                actions: ["Consider advanced longevity testing", "Explore genetic health screening", "Evaluate microbiome testing options", "Plan follow-up assessments"]
-                            }
-                        ]
-                    };
-                }
-                
-                localStorage.setItem('healthAssessmentResults', JSON.stringify(fallbackResults));
-                localStorage.setItem('cachedResults', JSON.stringify(fallbackResults));
-                
-                // Mark API call as completed
-                apiCallCompleted = true;
-                
-                // Complete the progress bar
-                document.getElementById('progressFill').style.width = '100%';
-                document.getElementById('progressText').textContent = 'Analysis complete! Redirecting...';
-                
-                setTimeout(() => {
-                    console.log('Redirecting to results.html with fallback data');
-                    window.location.href = 'results.html';
-                }, 2000);
+                // If there's an error, redirect to start new assessment
+                console.log('API call failed, redirecting to start new assessment');
+                window.location.href = 'index.html';
+                return;
             }
         }
         
