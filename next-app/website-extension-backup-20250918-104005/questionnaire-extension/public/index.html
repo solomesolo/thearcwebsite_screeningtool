@@ -940,6 +940,71 @@
             }
         }
 
+        /* Mobile Burger Menu Styles */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #f0abfc;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle:hover {
+            background: rgba(244, 114, 182, 0.1);
+            color: #f0abfc;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(244, 114, 182, 0.2);
+            border-radius: 0 0 1rem 1rem;
+            padding: 1rem;
+            z-index: 1000;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .mobile-menu nav a {
+            display: block;
+            padding: 0.75rem 1rem;
+            text-align: center;
+            border: 1px solid #f472b6;
+            color: #f0abfc;
+            background: transparent;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-menu nav a:hover {
+            background: rgba(244, 114, 182, 0.1);
+            color: #f0abfc;
+            box-shadow: 0 0 0 2px rgba(244, 114, 182, 0.4);
+        }
+
         /* Mobile-First Responsive Design */
         @media (max-width: 768px) {
             .container {
@@ -965,20 +1030,30 @@
             }
             
             .hero-section {
-                padding: 4rem 0;
+                padding: 3rem 0;
                 min-height: 100vh;
             }
             
             .header {
-                height: 50px;
+                height: 60px;
             }
             
             .main-content {
-                padding-top: 50px;
+                padding-top: 60px;
             }
             
             .header-content {
                 padding: 0 1rem;
+                position: relative;
+            }
+
+            /* Hide desktop nav, show mobile menu toggle */
+            .header nav {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
             }
             
             .hero-title {
@@ -1021,7 +1096,11 @@
             .categories-section,
             .testimonials-section,
             .faq-section {
-                padding: 6rem 0;
+                padding: 3rem 0;
+            }
+
+            .blog-section {
+                padding: 3rem 0;
             }
             
             /* Mobile-specific button improvements */
@@ -1079,6 +1158,22 @@
             }
         }
 
+        /* Tablet styles */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .stats-section,
+            .process-section,
+            .categories-section,
+            .testimonials-section,
+            .faq-section,
+            .blog-section {
+                padding: 4rem 0;
+            }
+            
+            .hero-section {
+                padding: 4rem 0;
+            }
+        }
+
         /* Extra small devices (phones in portrait) */
         @media (max-width: 480px) {
             .hero-title {
@@ -1116,6 +1211,20 @@
             
             .faq-answer {
                 font-size: 0.9rem;
+            }
+
+            /* Further reduce padding for very small screens */
+            .stats-section,
+            .process-section,
+            .categories-section,
+            .testimonials-section,
+            .faq-section,
+            .blog-section {
+                padding: 2rem 0;
+            }
+
+            .hero-section {
+                padding: 2rem 0;
             }
         }
 
@@ -1815,9 +1924,20 @@
     <header class="header">
         <div class="header-content">
             <div class="logo">TheArc</div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
             <nav class="flex space-x-4 text-lg font-semibold">
                 <a href="https://thearcme.com/" class="border border-blue-400 text-blue-200 bg-transparent hover:bg-blue-900/10 hover:text-blue-300 hover:ring-2 hover:ring-blue-400/40 backdrop-blur-sm transition-all font-semibold text-lg px-6 py-2 rounded-full tracking-wide font-montserrat">Return to Home</a>
                 <a href="consent.html" class="border border-fuchsia-400 text-fuchsia-200 bg-transparent hover:bg-fuchsia-900/10 hover:text-fuchsia-300 hover:ring-2 hover:ring-fuchsia-400/40 backdrop-blur-sm transition-all font-semibold text-lg px-6 py-2 rounded-full tracking-wide font-montserrat">Start Free Check</a>
+            </nav>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <nav>
+                <a href="https://thearcme.com/">Return to Home</a>
+                <a href="consent.html">Start Free Check</a>
             </nav>
         </div>
     </header>
@@ -2283,10 +2403,38 @@
             });
         });
 
+        // Mobile menu functionality
+        function initMobileMenu() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (mobileMenuToggle && mobileMenu) {
+                mobileMenuToggle.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('active');
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!mobileMenuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+                        mobileMenu.classList.remove('active');
+                    }
+                });
+                
+                // Close menu when clicking on a link
+                const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+                mobileMenuLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.remove('active');
+                    });
+                });
+            }
+        }
+
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
             createFloatingOrbs();
             initBlogCarousel();
+            initMobileMenu();
             initArticleModal();
         });
 
