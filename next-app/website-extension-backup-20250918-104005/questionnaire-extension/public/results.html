@@ -784,6 +784,13 @@
         console.log('🔍 healthAssessmentResults length:', cachedResults ? cachedResults.length : 'null');
         console.log('🔍 questionnaireData length:', questionnaireData ? questionnaireData.length : 'null');
         
+        // Debug: Show all localStorage values
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            const value = localStorage.getItem(key);
+            console.log('🔍 localStorage[' + key + ']:', value ? value.substring(0, 100) + '...' : 'null');
+        }
+        
         if (cachedResults) {
             console.log('✅ Using cached results from loading page');
             const data = JSON.parse(cachedResults);
@@ -795,9 +802,35 @@
             console.log('❌ No cached results, but have questionnaire data - redirecting to loading page');
             window.location.href = '/loading.html';
         } else {
-            console.log('❌ No data found, redirecting to start new assessment');
-            // Redirect to start new assessment if no data found
-            window.location.href = 'index.html';
+            console.log('❌ No data found, checking for any results data...');
+            
+            // Try to find any results data in localStorage
+            let foundResults = null;
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key && key.includes('result') || key.includes('assessment') || key.includes('health')) {
+                    const value = localStorage.getItem(key);
+                    console.log('🔍 Found potential results data in key:', key);
+                    try {
+                        const parsed = JSON.parse(value);
+                        if (parsed && (parsed.categories || parsed.urgent_tests || parsed.assessment_summary)) {
+                            foundResults = parsed;
+                            console.log('✅ Found valid results data in:', key);
+                            break;
+                        }
+                    } catch (e) {
+                        console.log('❌ Could not parse data from key:', key);
+                    }
+                }
+            }
+            
+            if (foundResults) {
+                console.log('✅ Using found results data');
+                displayResults(foundResults);
+            } else {
+                console.log('❌ No data found anywhere, redirecting to start new assessment');
+                window.location.href = 'index.html';
+            }
         }
         
         // Function to send results via email
