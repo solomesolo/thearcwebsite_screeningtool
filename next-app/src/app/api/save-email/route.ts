@@ -15,33 +15,53 @@ export async function POST(request: NextRequest) {
     
     const { email, timestamp, consent, source } = await request.json();
     
-    // First, let's get the database schema to see what properties exist
-    const database = await notion.databases.retrieve({
-      database_id: process.env.NOTION_DATABASE_ID!,
-    });
+    console.log('📧 Received data:', { email, timestamp, consent, source });
     
-    console.log('📋 Database properties:', Object.keys(database.properties));
+    // Try to get database schema first
+    let database;
+    try {
+      database = await notion.databases.retrieve({
+        database_id: process.env.NOTION_DATABASE_ID!,
+      });
+      console.log('📋 Database properties:', Object.keys(database.properties));
+    } catch (dbError) {
+      console.error('❌ Error retrieving database:', dbError);
+      // If we can't get the database, just try to create a simple page
+    }
     
-    // Create a simple page with just the email in the title
+    // Create a simple page with minimal properties
     const response = await notion.pages.create({
       parent: {
         database_id: process.env.NOTION_DATABASE_ID!,
       },
       properties: {
-        // Use the first title property we find
-        [Object.keys(database.properties)[0]]: {
-          title: [
-            {
-              text: {
-                content: `${email} - ${new Date().toLocaleDateString()}`,
+        // Try to use the first available property
+        ...(database && Object.keys(database.properties).length > 0 ? {
+          [Object.keys(database.properties)[0]]: {
+            title: [
+              {
+                text: {
+                  content: email,
+                },
               },
-            },
-          ],
-        },
+            ],
+          }
+        } : {
+          // Fallback: try common property names
+          "Name": {
+            title: [
+              {
+                text: {
+                  content: email,
+                },
+              },
+            ],
+          }
+        }),
       },
     });
     
-    console.log('Email saved to Notion:', response.id);
+    console.log('✅ Email saved to Notion:', response.id);
     
     return NextResponse.json({
       success: true,
@@ -49,7 +69,7 @@ export async function POST(request: NextRequest) {
       notionId: response.id
     });
   } catch (error) {
-    console.error('Error saving email to Notion:', error);
+    console.error('❌ Error saving email to Notion:', error);
     return NextResponse.json({
       success: false,
       error: error instanceof Error ? error.message : 'Unknown error'
