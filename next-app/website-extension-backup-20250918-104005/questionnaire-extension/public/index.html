@@ -964,16 +964,18 @@
             top: 100%;
             left: 0;
             right: 0;
-            background: rgba(10, 10, 10, 0.95);
+            background: rgba(10, 10, 10, 0.98);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(244, 114, 182, 0.2);
+            border: 2px solid #f472b6;
+            border-top: none;
             border-radius: 0 0 1rem 1rem;
-            padding: 1rem;
+            padding: 1.5rem;
             z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
         .mobile-menu.active {
-            display: block;
+            display: block !important;
         }
 
         .mobile-menu nav {
@@ -983,26 +985,26 @@
         }
 
         .mobile-menu nav a {
-            display: block;
-            padding: 0.75rem 1rem;
-            text-align: center;
-            border: 1px solid #f472b6;
-            color: #f0abfc;
-            background: transparent;
-            border-radius: 0.5rem;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            min-height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 1rem 1.5rem;
+            text-align: center;
+            border: 2px solid #f472b6;
+            color: #f0abfc;
+            background: rgba(244, 114, 182, 0.1);
+            border-radius: 0.75rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            min-height: 50px;
         }
 
         .mobile-menu nav a:hover {
-            background: rgba(244, 114, 182, 0.1);
-            color: #f0abfc;
-            box-shadow: 0 0 0 2px rgba(244, 114, 182, 0.4);
+            background: rgba(244, 114, 182, 0.2);
+            color: #ffffff;
+            transform: scale(1.02);
         }
 
         /* Mobile-First Responsive Design */
@@ -1054,6 +1056,23 @@
 
             .mobile-menu-toggle {
                 display: block;
+            }
+
+            /* Force mobile menu to be visible on mobile as fallback */
+            .mobile-menu {
+                display: block !important;
+                position: fixed;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(20px);
+                border: 2px solid #f472b6;
+                border-top: none;
+                border-radius: 0 0 1rem 1rem;
+                padding: 1.5rem;
+                z-index: 1000;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             }
 
             
@@ -2409,25 +2428,35 @@
             const mobileMenuToggle = document.getElementById('mobileMenuToggle');
             const mobileMenu = document.getElementById('mobileMenu');
             
+            console.log('Initializing mobile menu:', { mobileMenuToggle, mobileMenu });
+            
             if (mobileMenuToggle && mobileMenu) {
-                mobileMenuToggle.addEventListener('click', () => {
+                // Toggle menu on button click
+                mobileMenuToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Mobile menu toggle clicked');
                     mobileMenu.classList.toggle('active');
+                    console.log('Mobile menu active:', mobileMenu.classList.contains('active'));
+                });
+                
+                // Close menu when clicking on links
+                const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+                mobileMenuLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        console.log('Mobile menu link clicked');
+                        mobileMenu.classList.remove('active');
+                    });
                 });
                 
                 // Close menu when clicking outside
-                document.addEventListener('click', (e) => {
+                document.addEventListener('click', function(e) {
                     if (!mobileMenuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
                         mobileMenu.classList.remove('active');
                     }
                 });
-                
-                // Close menu when clicking on a link
-                const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-                mobileMenuLinks.forEach(link => {
-                    link.addEventListener('click', () => {
-                        mobileMenu.classList.remove('active');
-                    });
-                });
+            } else {
+                console.error('Mobile menu elements not found:', { mobileMenuToggle, mobileMenu });
             }
         }
 
