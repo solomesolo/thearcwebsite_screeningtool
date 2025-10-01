@@ -7,7 +7,7 @@ const openai = new OpenAI({
 
 export async function POST(request: NextRequest) {
   try {
-    const { responses, userEmail } = await request.json();
+    const { responses } = await request.json();
     
     // Create comprehensive prompt for ChatGPT
     const prompt = createHealthAssessmentPrompt(responses);
@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
     const aiResponse = completion.choices[0].message.content;
     
     // Parse AI response into structured format
-    const results = parseAIResponse(aiResponse);
+    const results = parseAIResponse(aiResponse || '');
     
     // Transform API response to match frontend expectations
     const transformedResults = {
@@ -117,11 +117,11 @@ export async function POST(request: NextRequest) {
       next_steps: [
         {
           timeframe: "URGENT (within 1 month)",
-          actions: results.urgent?.map(test => `Schedule ${test.test}`) || []
+          actions: results.urgent?.map((test: any) => `Schedule ${test.test}`) || []
         },
         {
           timeframe: "DUE SOON (within 3-6 months)", 
-          actions: results.dueSoon?.map(test => `Schedule ${test.test}`) || []
+          actions: results.dueSoon?.map((test: any) => `Schedule ${test.test}`) || []
         }
       ]
     };
@@ -140,7 +140,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-function createHealthAssessmentPrompt(responses: any[]) {
+function createHealthAssessmentPrompt(responses: Array<{question: string, answer: string}>) {
   let prompt = `Based on the following health questionnaire responses, provide a personalized screening plan:\n\n`;
   
   responses.forEach((response, index) => {
