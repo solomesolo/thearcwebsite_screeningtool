@@ -49,12 +49,47 @@ exports.handler = async (event, context) => {
     // Parse AI response into structured format
     const results = parseAIResponse(aiResponse);
     
+    // Transform API response to match frontend expectations
+    const transformedResults = {
+      assessment_summary: "Based on your responses, here are your personalized health screening recommendations:",
+      urgent_tests: results.urgent || [],
+      due_soon_tests: results.dueSoon || [],
+      optional_tests: results.optional || [],
+      categories: [
+        {
+          category_name: "Urgent Tests",
+          category_description: "Tests that should be completed within the next month",
+          tests: results.urgent || []
+        },
+        {
+          category_name: "Due Soon Tests", 
+          category_description: "Tests that should be completed within 3-6 months",
+          tests: results.dueSoon || []
+        },
+        {
+          category_name: "Optional Tests",
+          category_description: "General wellness and preventive screening tests",
+          tests: results.optional || []
+        }
+      ],
+      next_steps: [
+        {
+          timeframe: "URGENT (within 1 month)",
+          actions: results.urgent?.map(test => `Schedule ${test.test}`) || []
+        },
+        {
+          timeframe: "DUE SOON (within 3-6 months)", 
+          actions: results.dueSoon?.map(test => `Schedule ${test.test}`) || []
+        }
+      ]
+    };
+
     return {
       statusCode: 200,
       headers,
       body: JSON.stringify({
         success: true,
-        results: results,
+        results: transformedResults,
         aiResponse: aiResponse
       }),
     };

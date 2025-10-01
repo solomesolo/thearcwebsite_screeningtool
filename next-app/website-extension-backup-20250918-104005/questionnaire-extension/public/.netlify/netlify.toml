@@ -7,12 +7,14 @@ headers = []
 [functions]
 
 [functions."*"]
-node_bundler = "esbuild"
+node_bundler = "nft"
 
 [build]
 publish = "/Users/solo/Desktop/TheArc_website/next-app/website-extension-backup-20250918-104005/questionnaire-extension/public"
 publishOrigin = "config"
+commandOrigin = "config"
 base = "/Users/solo/Desktop/TheArc_website/next-app/website-extension-backup-20250918-104005/questionnaire-extension/public"
+command = "npm install"
 functions = "/Users/solo/Desktop/TheArc_website/next-app/website-extension-backup-20250918-104005/questionnaire-extension/public/api"
 
 [build.environment]

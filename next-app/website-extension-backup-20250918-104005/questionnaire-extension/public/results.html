@@ -795,40 +795,9 @@
             console.log('❌ No cached results, but have questionnaire data - redirecting to loading page');
             window.location.href = '/loading.html';
         } else {
-            console.log('❌ No data found, using test data for debugging');
-            // Test data to verify display functions work
-            const testData = {
-                assessment_summary: "Test assessment summary for debugging purposes.",
-                urgent_tests: [
-                    {
-                        name: "Test HbA1c",
-                        explanation: "Test explanation for HbA1c test",
-                        timeframe: "Within 2 weeks",
-                        status: "NEVER DONE"
-                    }
-                ],
-                categories: [
-                    {
-                        category_name: "Test Category",
-                        category_description: "Test category description",
-                        tests: [
-                            {
-                                name: "Test Lipid Panel",
-                                description: "Test lipid panel description",
-                                status: "MISSING"
-                            }
-                        ]
-                    }
-                ],
-                next_steps: [
-                    {
-                        timeframe: "URGENT (within 2 weeks)",
-                        actions: ["Test action 1", "Test action 2"]
-                    }
-                ]
-            };
-            console.log('🧪 Using test data:', testData);
-            displayResults(testData);
+            console.log('❌ No data found, redirecting to start new assessment');
+            // Redirect to start new assessment if no data found
+            window.location.href = 'index.html';
         }
         
         // Function to send results via email
