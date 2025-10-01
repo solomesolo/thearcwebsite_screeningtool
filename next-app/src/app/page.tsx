@@ -24,9 +24,7 @@ export default function Home() {
             <div className="text-3xl md:text-4xl font-bold tracking-tight text-white select-none mt-0 md:mt-0">TheArc</div>
             <nav className="flex space-x-4 text-base font-light">
               <Link 
-                href="https://screening.thearcme.com" 
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/screening" 
                 className="border border-blue-400 text-blue-200 bg-transparent hover:bg-blue-900/10 hover:text-blue-300 hover:ring-2 hover:ring-blue-400/40 backdrop-blur-sm transition-all font-semibold text-base md:text-lg px-4 py-1.5 rounded-full tracking-wide"
               >
                 Health Screening
@@ -59,9 +57,7 @@ export default function Home() {
             
             {/* Health Screening Button */}
             <Link 
-              href="https://screening.thearcme.com" 
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/screening" 
               className="inline-flex items-center px-6 py-3 rounded-full text-base font-semibold bg-gradient-to-r from-blue-800 via-blue-600 to-blue-400 text-white shadow-lg border-2 border-blue-700 hover:scale-105 transition-all"
             >
               Free Health Screening
