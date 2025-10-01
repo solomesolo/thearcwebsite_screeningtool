@@ -256,6 +256,60 @@
             currentFactIndex = (currentFactIndex + 1) % facts.length;
         }
         
+        // Transform questionnaire data into API-expected format
+        function transformQuestionnaireData(rawData) {
+            const transformed = [];
+            
+            // Map questionnaire fields to question-answer pairs
+            const fieldMappings = {
+                'age': 'What is your age?',
+                'gender': 'What is your gender?',
+                'height': 'What is your height?',
+                'weight': 'What is your weight?',
+                'family_history': 'Do you have a family history of any of the following conditions?',
+                'medical_diagnoses': 'Have you been diagnosed with any of the following conditions?',
+                'medications': 'Do you currently take prescription medications or long-term supplements?',
+                'medications_list': 'List your current medications/supplements',
+                'diet_type': 'What type of diet do you follow?',
+                'diet_other': 'Please specify your diet',
+                'exercise_frequency': 'How often do you exercise?',
+                'exercise_type': 'What type of exercise do you do?',
+                'exercise_other': 'Please specify your exercise type',
+                'sleep_hours': 'How many hours of sleep do you get per night?',
+                'sleep_quality': 'How would you rate your sleep quality?',
+                'stress_level': 'How would you rate your stress level?',
+                'smoking': 'Do you smoke or use tobacco products?',
+                'alcohol': 'How often do you drink alcohol?',
+                'skin_changes': 'Have you noticed any changes in your skin?',
+                'skin_changes_desc': 'Describe the skin changes',
+                'additional_info': 'Is there anything else about your health that you think is important for us to know?'
+            };
+            
+            // Transform each field
+            Object.keys(fieldMappings).forEach(field => {
+                if (rawData[field] !== undefined && rawData[field] !== null && rawData[field] !== '') {
+                    let answer = rawData[field];
+                    
+                    // Handle arrays (like family_history)
+                    if (Array.isArray(answer)) {
+                        answer = answer.join(', ');
+                    }
+                    
+                    // Handle boolean values
+                    if (typeof answer === 'boolean') {
+                        answer = answer ? 'Yes' : 'No';
+                    }
+                    
+                    transformed.push({
+                        question: fieldMappings[field],
+                        answer: answer
+                    });
+                }
+            });
+            
+            return transformed;
+        }
+        
         async function processHealthData() {
             try {
                 console.log('Starting health data processing...');
@@ -265,8 +319,12 @@
                 document.getElementById('progressText').textContent = 'Connecting to AI analysis...';
                 
                 // Get answers from localStorage
-                const answers = JSON.parse(localStorage.getItem('questionnaireData') || '{}');
-                console.log('Answers from localStorage:', answers);
+                const rawAnswers = JSON.parse(localStorage.getItem('questionnaireData') || '{}');
+                console.log('Raw answers from localStorage:', rawAnswers);
+                
+                // Transform questionnaire data into API-expected format
+                const answers = transformQuestionnaireData(rawAnswers);
+                console.log('Transformed answers for API:', answers);
                 
                 // Check if we have cached results
                 const cachedResults = localStorage.getItem('cachedResults');
