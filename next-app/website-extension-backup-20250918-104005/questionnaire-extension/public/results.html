@@ -931,8 +931,8 @@
                                 <h3>Urgent Tests</h3>
                                 ${(results.urgent_tests || results.urgentTests).map(test => `
                                     <div class="test-item urgent">
-                                        <strong>${test.name}</strong><br>
-                                        ${test.explanation}<br>
+                                        <strong>${test.test || test.name || 'Test'}</strong><br>
+                                        ${test.reason || test.explanation || 'No description available'}<br>
                                         <em>Timeframe: ${test.timeframe}</em>
                                     </div>
                                 `).join('')}
@@ -947,7 +947,7 @@
                                         <strong>${category.category_name}</strong><br>
                                         ${category.category_description}<br>
                                         <ul>
-                                            ${category.tests.map(test => `<li>${test.name} - ${test.description}</li>`).join('')}
+                                            ${category.tests.map(test => `<li>${test.test || test.name || 'Test'} - ${test.reason || test.description || 'No description'}</li>`).join('')}
                                         </ul>
                                     </div>
                                 `).join('')}
@@ -988,7 +988,7 @@
                 
                 ${results.urgent_tests || results.urgentTests ? `
                 Urgent Tests:
-                ${(results.urgent_tests || results.urgentTests).map(test => `- ${test.name}: ${test.explanation} (${test.timeframe})`).join('\n')}
+                ${(results.urgent_tests || results.urgentTests).map(test => `- ${test.test || test.name || 'Test'}: ${test.reason || test.explanation || 'No description'} (${test.timeframe})`).join('\n')}
                 ` : ''}
                 
                 ${results.categories ? `
@@ -996,7 +996,7 @@
                 ${results.categories.map(category => `
                 ${category.category_name}:
                 ${category.category_description}
-                Tests: ${category.tests.map(test => test.name).join(', ')}
+                Tests: ${category.tests.map(test => test.test || test.name || 'Test').join(', ')}
                 `).join('\n')}
                 ` : ''}
                 
@@ -1195,10 +1195,10 @@
                         return `
                             <div class="category-test">
                                 <div class="test-header">
-                                    <div class="test-title">${test.name}</div>
+                                    <div class="test-title">${test.test || test.name || 'Test'}</div>
                                     <div class="test-status ${statusClass}">${test.status}</div>
                                 </div>
-                                <div class="test-explanation">${test.description}</div>
+                                <div class="test-explanation">${test.reason || test.description || 'No description available'}</div>
                             </div>
                         `;
                     }).join('');
@@ -1258,8 +1258,8 @@
                 
                 testElement.innerHTML = `
                     <div class="test-info">
-                        <div class="test-name">${test.name}</div>
-                        <div class="test-description">${test.explanation}</div>
+                        <div class="test-name">${test.test || test.name || 'Test'}</div>
+                        <div class="test-description">${test.reason || test.explanation || 'No description available'}</div>
                         <div class="test-timeframe">Timeframe: ${test.timeframe}</div>
                     </div>
                     <div class="test-status ${statusClass}">${test.status}</div>
