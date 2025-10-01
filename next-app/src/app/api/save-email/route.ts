@@ -15,38 +15,28 @@ export async function POST(request: NextRequest) {
     
     const { email, timestamp, consent, source } = await request.json();
     
-    // Save to Notion database
+    // First, let's get the database schema to see what properties exist
+    const database = await notion.databases.retrieve({
+      database_id: process.env.NOTION_DATABASE_ID!,
+    });
+    
+    console.log('📋 Database properties:', Object.keys(database.properties));
+    
+    // Create a simple page with just the email in the title
     const response = await notion.pages.create({
       parent: {
         database_id: process.env.NOTION_DATABASE_ID!,
       },
       properties: {
-        Email: {
+        // Use the first title property we find
+        [Object.keys(database.properties)[0]]: {
           title: [
             {
               text: {
-                content: email,
+                content: `${email} - ${new Date().toLocaleDateString()}`,
               },
             },
           ],
-        },
-        Timestamp: {
-          date: {
-            start: timestamp,
-          },
-        },
-        Consent: {
-          checkbox: consent,
-        },
-        Source: {
-          select: {
-            name: source,
-          },
-        },
-        Status: {
-          select: {
-            name: 'active',
-          },
         },
       },
     });
