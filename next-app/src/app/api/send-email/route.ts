@@ -1,11 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import sgMail from '@sendgrid/mail';
 
-// Set API key
-sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
-
 export async function POST(request: NextRequest) {
   try {
+    // Debug environment variables
+    console.log('🔍 SendGrid Environment check:');
+    console.log('SENDGRID_API_KEY exists:', !!process.env.SENDGRID_API_KEY);
+    console.log('SENDGRID_FROM_EMAIL:', process.env.SENDGRID_FROM_EMAIL);
+    
+    // Set API key inside the handler
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
+    
     const { to, subject, htmlContent, textContent } = await request.json();
     
     const msg = {

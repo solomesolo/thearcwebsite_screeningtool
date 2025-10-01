@@ -1,13 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Client } from '@notionhq/client';
 
-// Initialize Notion client
-const notion = new Client({
-  auth: process.env.NOTION_TOKEN,
-});
-
 export async function POST(request: NextRequest) {
   try {
+    // Debug environment variables
+    console.log('🔍 Notion Environment check:');
+    console.log('NOTION_TOKEN exists:', !!process.env.NOTION_TOKEN);
+    console.log('NOTION_DATABASE_ID:', process.env.NOTION_DATABASE_ID);
+    
+    // Initialize Notion client inside the handler
+    const notion = new Client({
+      auth: process.env.NOTION_TOKEN,
+    });
+    
     const { email, timestamp, consent, source } = await request.json();
     
     // Save to Notion database
