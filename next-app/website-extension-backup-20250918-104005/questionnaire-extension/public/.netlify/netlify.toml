@@ -1,15 +1,19 @@
+redirectsOrigin = "config"
 plugins = []
+functionsDirectory = "/Users/solo/Desktop/TheArc_website/next-app/website-extension-backup-20250918-104005/questionnaire-extension/public/api"
+functionsDirectoryOrigin = "config-v1"
 headers = []
-redirects = []
 
 [functions]
 
 [functions."*"]
+node_bundler = "esbuild"
 
 [build]
 publish = "/Users/solo/Desktop/TheArc_website/next-app/website-extension-backup-20250918-104005/questionnaire-extension/public"
-publishOrigin = "default"
+publishOrigin = "config"
 base = "/Users/solo/Desktop/TheArc_website/next-app/website-extension-backup-20250918-104005/questionnaire-extension/public"
+functions = "/Users/solo/Desktop/TheArc_website/next-app/website-extension-backup-20250918-104005/questionnaire-extension/public/api"
 
 [build.environment]
 
@@ -24,3 +28,15 @@ base = "/Users/solo/Desktop/TheArc_website/next-app/website-extension-backup-202
 [build.processing.js]
 
 [build.services]
+
+[[redirects]]
+from = "/api/*"
+to = "/.netlify/functions/:splat"
+status = 200.0
+force = false
+
+[redirects.query]
+
+[redirects.conditions]
+
+[redirects.headers]
