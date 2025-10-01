@@ -1,9 +1,9 @@
-// Serverless function for sending emails via SendGrid
+// Netlify function for sending emails via SendGrid
 const sgMail = require('@sendgrid/mail');
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
 exports.handler = async (event, context) => {
+  // Set API key
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   // Enable CORS
   const headers = {
     'Access-Control-Allow-Origin': '*',

@@ -1,11 +1,11 @@
-// Serverless function for saving email to Notion
+// Netlify function for saving email to Notion
 const { Client } = require('@notionhq/client');
 
-const notion = new Client({
-  auth: process.env.NOTION_TOKEN,
-});
-
 exports.handler = async (event, context) => {
+  // Initialize Notion client
+  const notion = new Client({
+    auth: process.env.NOTION_TOKEN,
+  });
   // Enable CORS
   const headers = {
     'Access-Control-Allow-Origin': '*',
