@@ -1029,8 +1029,9 @@
                 console.log('🎯 Using fallback data:', actualData);
             }
             
-            // Email is now sent automatically by the backend during API processing
-            console.log('📧 Email sending is handled by backend during API call');
+            // Send results via email
+            console.log('📧 Sending results via email...');
+            sendResultsEmail(actualData);
             
             console.log('🎯 Urgent tests:', actualData.urgentTests || actualData.urgent_tests);
             console.log('🎯 Categories:', actualData.categories);
