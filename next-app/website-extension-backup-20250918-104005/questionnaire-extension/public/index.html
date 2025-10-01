@@ -940,71 +940,17 @@
             }
         }
 
-        /* Mobile Burger Menu Styles */
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: #f0abfc;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 0.5rem;
+        /* Mobile-Optimized Header Styles */
+        .header nav a {
             transition: all 0.3s ease;
         }
 
-        .mobile-menu-toggle:hover {
-            background: rgba(244, 114, 182, 0.1);
-            color: #f0abfc;
-        }
-
-        .mobile-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: rgba(10, 10, 10, 0.98);
-            backdrop-filter: blur(20px);
-            border: 2px solid #f472b6;
-            border-top: none;
-            border-radius: 0 0 1rem 1rem;
-            padding: 1.5rem;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .mobile-menu.active {
-            display: block !important;
-        }
-
-        .mobile-menu nav {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .mobile-menu nav a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem 1.5rem;
-            text-align: center;
-            border: 2px solid #f472b6;
-            color: #f0abfc;
-            background: rgba(244, 114, 182, 0.1);
-            border-radius: 0.75rem;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            min-height: 50px;
-        }
-
-        .mobile-menu nav a:hover {
-            background: rgba(244, 114, 182, 0.2);
-            color: #ffffff;
-            transform: scale(1.02);
+        /* Tablet Styles */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .header nav a {
+                font-size: 0.95rem;
+                padding: 0.6rem 1.2rem;
+            }
         }
 
         /* Mobile-First Responsive Design */
@@ -1037,42 +983,63 @@
             }
             
             .header {
-                height: 60px;
+                height: 80px;
+                padding: 0.5rem 0;
             }
             
             .main-content {
-                padding-top: 60px;
+                padding-top: 80px;
             }
             
             .header-content {
                 padding: 0 1rem;
                 position: relative;
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
             }
 
-            /* Hide desktop nav, show mobile menu toggle */
+            /* Mobile-optimized navigation */
             .header nav {
-                display: none;
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+                align-items: center;
             }
 
-            .mobile-menu-toggle {
-                display: block;
+            .header nav a {
+                font-size: 0.9rem;
+                padding: 0.75rem 1.25rem;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                width: 100%;
+                max-width: 200px;
+                border-radius: 0.5rem;
             }
+        }
 
-            /* Force mobile menu to be visible on mobile as fallback */
-            .mobile-menu {
-                display: block !important;
-                position: fixed;
-                top: 60px;
-                left: 0;
-                right: 0;
-                background: rgba(10, 10, 10, 0.98);
-                backdrop-filter: blur(20px);
-                border: 2px solid #f472b6;
-                border-top: none;
-                border-radius: 0 0 1rem 1rem;
-                padding: 1.5rem;
-                z-index: 1000;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        /* Extra small mobile screens */
+        @media (max-width: 480px) {
+            .header {
+                height: 100px;
+            }
+            
+            .main-content {
+                padding-top: 100px;
+            }
+            
+            .header-content {
+                gap: 0.75rem;
+            }
+            
+            .header nav a {
+                font-size: 0.85rem;
+                padding: 0.6rem 1rem;
+                min-height: 40px;
+                max-width: 180px;
             }
 
             
@@ -1944,20 +1911,9 @@
     <header class="header">
         <div class="header-content">
             <div class="logo">TheArc</div>
-            <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                </svg>
-            </button>
             <nav class="flex space-x-4 text-lg font-semibold">
                 <a href="https://thearcme.com/" class="border border-blue-400 text-blue-200 bg-transparent hover:bg-blue-900/10 hover:text-blue-300 hover:ring-2 hover:ring-blue-400/40 backdrop-blur-sm transition-all font-semibold text-lg px-6 py-2 rounded-full tracking-wide font-montserrat">Return to Home</a>
                 <a href="consent.html" class="border border-fuchsia-400 text-fuchsia-200 bg-transparent hover:bg-fuchsia-900/10 hover:text-fuchsia-300 hover:ring-2 hover:ring-fuchsia-400/40 backdrop-blur-sm transition-all font-semibold text-lg px-6 py-2 rounded-full tracking-wide font-montserrat">Start Free Check</a>
-            </nav>
-        </div>
-        <div class="mobile-menu" id="mobileMenu">
-            <nav>
-                <a href="https://thearcme.com/">Return to Home</a>
-                <a href="consent.html">Start Free Check</a>
             </nav>
         </div>
     </header>
@@ -2423,48 +2379,11 @@
             });
         });
 
-        // Mobile menu functionality
-        function initMobileMenu() {
-            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-            const mobileMenu = document.getElementById('mobileMenu');
-            
-            console.log('Initializing mobile menu:', { mobileMenuToggle, mobileMenu });
-            
-            if (mobileMenuToggle && mobileMenu) {
-                // Toggle menu on button click
-                mobileMenuToggle.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log('Mobile menu toggle clicked');
-                    mobileMenu.classList.toggle('active');
-                    console.log('Mobile menu active:', mobileMenu.classList.contains('active'));
-                });
-                
-                // Close menu when clicking on links
-                const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-                mobileMenuLinks.forEach(link => {
-                    link.addEventListener('click', function() {
-                        console.log('Mobile menu link clicked');
-                        mobileMenu.classList.remove('active');
-                    });
-                });
-                
-                // Close menu when clicking outside
-                document.addEventListener('click', function(e) {
-                    if (!mobileMenuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
-                        mobileMenu.classList.remove('active');
-                    }
-                });
-            } else {
-                console.error('Mobile menu elements not found:', { mobileMenuToggle, mobileMenu });
-            }
-        }
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
             createFloatingOrbs();
             initBlogCarousel();
-            initMobileMenu();
             initArticleModal();
         });
 
