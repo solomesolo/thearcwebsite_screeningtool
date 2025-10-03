@@ -18,10 +18,6 @@
     {
       "src": "/screening",
       "dest": "/public/screening/index.html"
-    },
-    {
-      "src": "/(.*\\.(html|css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))",
-      "dest": "/public/$1"
     }
   ]
 }
