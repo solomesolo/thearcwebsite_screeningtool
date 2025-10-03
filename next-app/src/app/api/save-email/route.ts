@@ -3,7 +3,8 @@ import { Client } from '@notionhq/client';
 
 export async function POST(request: NextRequest) {
   try {
-    // Debug environment variables
+    // Add a unique identifier to confirm this is the new version
+    console.log('🚀 NEW VERSION API CALLED - save-email route');
     console.log('🔍 Notion Environment check:');
     console.log('NOTION_TOKEN exists:', !!process.env.NOTION_TOKEN);
     console.log('NOTION_DATABASE_ID:', process.env.NOTION_DATABASE_ID);
